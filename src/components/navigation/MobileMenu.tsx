@@ -1,52 +1,69 @@
 import { motion } from 'framer-motion'
 import { NavLink } from 'react-router-dom'
 import { navItems } from '@/data/nav'
-import ThemeToggle from './ThemeToggle'
-import Button from '@/components/common/Button'
 
-export default function MobileMenu({ onClose, onResume }: { onClose: () => void; onResume: () => void }) {
-  const flat = navItems.flatMap((item) => (item.children ? item.children : [{ label: item.label, path: item.path! }]))
+interface MobileMenuProps {
+  onClose: () => void
+}
+
+export default function MobileMenu({
+  onClose,
+}: MobileMenuProps) {
+  const flatNavItems = navItems.flatMap((item) =>
+    item.children
+      ? item.children
+      : [
+        {
+          label: item.label,
+          path: item.path!,
+        },
+      ]
+  )
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-30 bg-background md:hidden"
+      initial={{
+        opacity: 0,
+        y: -16,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+      exit={{
+        opacity: 0,
+        y: -16,
+      }}
+      transition={{
+        duration: 0.25,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="fixed inset-x-0 h-full top-[70px] z-40 border-b border-border bg-background/95 px-5 pb-8 pt-4 shadow-lg backdrop-blur-xl md:hidden"
     >
-      <div className="flex h-full flex-col justify-between px-6 pb-10 pt-28">
-        <nav className="flex flex-col gap-1">
-          {flat.map((item, i) => (
-            <motion.div
-              key={item.path}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05 * i }}
-            >
-              <NavLink
-                to={item.path}
-                onClick={onClose}
-                className={({ isActive }) =>
-                  `block border-b border-border py-4 text-2xl font-medium ${isActive ? 'text-accent' : 'text-foreground'}`
-                }
-              >
-                {item.label}
-              </NavLink>
-            </motion.div>
-          ))}
-        </nav>
-
-        <div className="flex items-center justify-between">
-          <span className="mono-label flex items-center gap-1.5 text-muted">
-            <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
-            Available
-          </span>
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
-            <Button onClick={onResume}>Resume</Button>
-          </div>
-        </div>
-      </div>
+      <nav className="mx-auto max-w-xl" aria-label="Mobile navigation" >
+        {flatNavItems.map((item, index) => (
+          <motion.div
+            key={item.path}
+            initial={{
+              opacity: 0,
+              y: 12,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              delay: 0.04 * index,
+              duration: 0.25,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            <NavLink to={item.path} onClick={onClose} className={({ isActive }) => `flex items-center justify-between border-b border-border py-4 text-base font-medium transition-colors ${isActive ? 'text-accent' : 'text-foreground hover:text-accent'}`}>
+              {item.label}
+            </NavLink>
+          </motion.div>
+        ))}
+      </nav>
     </motion.div>
   )
 }

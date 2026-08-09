@@ -178,7 +178,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(900px_circle_at_top,_rgb(var(--accent)/0.14),transparent_60%)]" />
-        <Container className="py-16 sm:py-24">
+        <Container className="pt-[7rem] pb-16 sm:py-24">
           <div className="mx-auto max-w-2xl text-center">
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
               <span className="mono-label inline-flex items-center gap-1.5 rounded-full border border-success/30 bg-success/10 px-3 py-1 text-success">
@@ -295,27 +295,42 @@ export default function Home() {
       </section>
 
       {/* Tech Stack — interactive radial connection graph */}
-      <section className="py-20 sm:py-28">
+      <section className="relative overflow-hidden border-t border-border py-16 sm:py-20">
         <Container>
-          <SectionHeading label="03 / Stack" title="Technologies I build with" />
-          <div className="mt-14 grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-center">
-            <div>
-              <p className="max-w-sm text-muted leading-relaxed">
-                A focused toolkit centered on Angular and React, extended with the ecosystem
-                needed to design, build and ship production interfaces.
-              </p>
-              <div className="mt-8 flex flex-col">
+          <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+
+            {/* Tech List */}
+            <div className="min-w-0">
+              <Reveal>
+                <p className="mono-label mb-3 text-accent">
+                  Tech Stack
+                </p>
+
+                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                  Tools I build with
+                </h2>
+
+                <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted sm:text-base">
+                  A focused toolkit centered on Angular and React, extended with the
+                  ecosystem needed to design, build and ship production interfaces.
+                </p>
+              </Reveal>
+
+              <div className="mt-8">
                 {coreTech.map((t, i) => (
                   <Reveal key={t.name} delay={i * 0.04}>
                     <button
                       type="button"
                       onMouseEnter={() => setHoveredTech(i)}
                       onMouseLeave={() => setHoveredTech(null)}
-                      className={`group flex w-full items-center justify-between border-b border-border py-2.5 text-left text-sm transition-colors ${hoveredTech === i ? 'text-accent' : ''
+                      className={`group flex w-full items-center justify-between border-b border-border py-3 text-left text-sm transition-colors ${hoveredTech === i
+                          ? 'text-accent'
+                          : 'text-foreground'
                         }`}
                     >
-                      <span className="font-medium">{t.name}</span>
-                      <span className="mono-label text-muted opacity-0 transition-opacity group-hover:opacity-100">
+                      <span>{t.name}</span>
+
+                      <span className="text-xs text-muted">
                         {t.category}
                       </span>
                     </button>
@@ -324,57 +339,107 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Radial Graph */}
             <Reveal delay={0.1}>
-              <div className="relative mx-auto aspect-square w-full max-w-md">
-                <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full overflow-visible">
+              <div className="relative mx-auto w-full max-w-[420px] overflow-hidden">
+                <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-border bg-card/30">
+
+                  {/* Decorative grid */}
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 opacity-40"
+                    style={{
+                      backgroundImage: `
+                  linear-gradient(to right, rgb(var(--border) / 0.35) 1px, transparent 1px),
+                  linear-gradient(to bottom, rgb(var(--border) / 0.35) 1px, transparent 1px)
+                `,
+                      backgroundSize: '32px 32px',
+                    }}
+                  />
+
+                  {/* SVG Connections */}
+                  <svg
+                    viewBox="0 0 100 100"
+                    preserveAspectRatio="xMidYMid meet"
+                    className="pointer-events-none absolute inset-0 h-full w-full"
+                  >
+                    {coreTech.map((t, i) => {
+                      const { x, y } = polarToPercent(
+                        i,
+                        coreTech.length
+                      )
+
+                      const active = hoveredTech === i
+
+                      return (
+                        <motion.line
+                          key={t.name}
+                          x1="50"
+                          y1="50"
+                          x2={x}
+                          y2={y}
+                          initial={{ pathLength: 0 }}
+                          whileInView={{ pathLength: 1 }}
+                          viewport={{ once: true }}
+                          transition={{
+                            duration: 0.6,
+                            delay: i * 0.05,
+                          }}
+                          className={
+                            active
+                              ? 'stroke-accent'
+                              : 'stroke-border'
+                          }
+                          strokeWidth={active ? 0.8 : 0.4}
+                        />
+                      )
+                    })}
+                  </svg>
+
+                  {/* Center Core */}
+                  <div className="absolute left-1/2 top-1/2 z-10 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-accent/40 bg-background text-center shadow-lg sm:h-16 sm:w-16">
+                    <span className="mono-label text-accent">
+                      Core
+                    </span>
+                  </div>
+
+                  {/* Tech Nodes */}
                   {coreTech.map((t, i) => {
-                    const { x, y } = polarToPercent(i, coreTech.length)
+                    const { x, y } = polarToPercent(
+                      i,
+                      coreTech.length
+                    )
+
                     const active = hoveredTech === i
+
                     return (
-                      <motion.line
+                      <div
                         key={t.name}
-                        x1="50"
-                        y1="50"
-                        x2={x}
-                        y2={y}
-                        initial={{ pathLength: 0 }}
-                        whileInView={{ pathLength: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: i * 0.05 }}
-                        className={`stroke-current transition-colors ${active ? 'text-accent' : 'text-border'}`}
-                        strokeWidth={active ? 0.8 : 0.4}
-                      />
+                        className="group absolute z-20 -translate-x-1/2 -translate-y-1/2"
+                        style={{
+                          left: `${x}%`,
+                          top: `${y}%`,
+                        }}
+                        onMouseEnter={() => setHoveredTech(i)}
+                        onMouseLeave={() => setHoveredTech(null)}
+                      >
+                        <div
+                          className={`flex h-11 w-11 cursor-default items-center justify-center rounded-full border bg-background px-1 text-center text-[9px] font-medium transition-all duration-200 sm:h-14 sm:w-14 sm:text-[11px] ${active
+                              ? '-translate-y-0.5 border-accent text-accent shadow-lg'
+                              : 'border-border text-foreground'
+                            }`}
+                        >
+                          {t.name}
+                        </div>
+
+                        {/* Tooltip */}
+                        <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 w-40 -translate-x-1/2 rounded-xl border border-border bg-card p-3 text-[11px] leading-relaxed text-muted opacity-0 shadow-xl transition-opacity duration-200 group-hover:opacity-100 sm:w-44 sm:text-xs">
+                          {t.description}
+                        </div>
+                      </div>
                     )
                   })}
-                </svg>
-
-                <div className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-accent/40 bg-card text-center">
-                  <span className="mono-label text-accent">Core</span>
                 </div>
-
-                {coreTech.map((t, i) => {
-                  const { x, y } = polarToPercent(i, coreTech.length)
-                  const active = hoveredTech === i
-                  return (
-                    <div
-                      key={t.name}
-                      className="group absolute -translate-x-1/2 -translate-y-1/2"
-                      style={{ left: `${x}%`, top: `${y}%` }}
-                      onMouseEnter={() => setHoveredTech(i)}
-                      onMouseLeave={() => setHoveredTech(null)}
-                    >
-                      <div
-                        className={`flex h-14 w-14 cursor-default items-center justify-center rounded-full border bg-card px-1 text-center text-[11px] font-medium transition-all ${active ? 'border-accent -translate-y-0.5 shadow-lg' : 'border-border'
-                          }`}
-                      >
-                        {t.name}
-                      </div>
-                      <div className="pointer-events-none absolute left-1/2 top-full z-10 mt-2 w-44 -translate-x-1/2 rounded-xl border border-border bg-card p-3 text-xs text-muted opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
-                        {t.description}
-                      </div>
-                    </div>
-                  )
-                })}
               </div>
             </Reveal>
           </div>
