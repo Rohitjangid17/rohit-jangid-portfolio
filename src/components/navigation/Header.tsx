@@ -137,8 +137,8 @@ const Header = () => {
 
               {/* Desktop Resume */}
               <a
-                href="/Rohit-Jangid-Resume.pdf"
-                download="Rohit-Jangid-Resume.pdf"
+                href="/Rohit_Jangid_SDE_Resume.pdf"
+                download="Rohit_Jangid_SDE_Resume.pdf"
                 className="hidden md:inline-flex"
                 aria-label="Download Resume"
               >
@@ -158,8 +158,8 @@ const Header = () => {
 
               {/* Mobile Resume Download */}
               <a
-                href="/Rohit-Jangid-Resume.pdf"
-                download="Rohit-Jangid-Resume.pdf"
+                href="/Rohit_Jangid_SDE_Resume.pdf"
+                download="Rohit_Jangid_SDE_Resume.pdf"
                 aria-label="Download Resume"
                 title="Download Resume"
                 className="grid h-9 w-9 place-items-center rounded-full border border-border text-foreground transition-all duration-200 hover:border-accent hover:text-accent sm:h-10 sm:w-10 md:hidden"

@@ -10,7 +10,7 @@ import { projects } from '@/data/projects'
 import { technologies } from '@/data/technologies'
 import { blogPosts } from '@/data/blog'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Download } from 'lucide-react'
 
 interface Profile {
   title: string
@@ -309,8 +309,8 @@ export default function Home() {
                       onMouseEnter={() => setHoveredTech(i)}
                       onMouseLeave={() => setHoveredTech(null)}
                       className={`group flex w-full items-center justify-between border-b border-border py-3 text-left text-sm transition-colors ${hoveredTech === i
-                          ? 'text-accent'
-                          : 'text-foreground'
+                        ? 'text-accent'
+                        : 'text-foreground'
                         }`}
                     >
                       <span>{t.name}</span>
@@ -410,8 +410,8 @@ export default function Home() {
                       >
                         <div
                           className={`flex h-14 w-14 cursor-default items-center justify-center rounded-full border bg-background p-1 text-center text-[9px] font-medium transition-all duration-200 sm:h-16 sm:w-16 sm:text-[11px] ${active
-                              ? '-translate-y-0.5 border-accent text-accent shadow-lg'
-                              : 'border-border text-foreground'
+                            ? '-translate-y-0.5 border-accent text-accent shadow-lg'
+                            : 'border-border text-foreground'
                             }`}
                         >
                           {t.name}
@@ -585,7 +585,24 @@ export default function Home() {
               </p>
               <div className="mt-4 sm:mt-8 flex flex-wrap justify-center gap-3">
                 <Button to="/contact">Start a Conversation</Button>
-                <Button variant="secondary" to="/contact">View Resume</Button>
+                <a
+                  href="/Rohit_Jangid_SDE_Resume.pdf"
+                  download="Rohit_Jangid_SDE_Resume.pdf"
+                  className="hidden md:inline-flex"
+                  aria-label="Download Resume"
+                >
+                  <Button
+                    variant="secondary"
+                    className="group inline-flex items-center gap-2"
+                  >
+                    Resume
+                    <Download
+                      size={15}
+                      strokeWidth={1.8}
+                      className="transition-transform duration-200 group-hover:translate-y-0.5"
+                    />
+                  </Button>
+                </a>
               </div>
             </div>
           </Reveal>

@@ -377,7 +377,7 @@ function PostCard({ post, index }: { post: Post; index: number }) {
   return (
     <Reveal delay={index * 0.06} className={spanWide ? 'sm:col-span-2' : ''}>
       <Link
-        to={`/blog/${post.slug}`}
+        to={`/blog/blog-details/${post.slug}`}
         className="group block h-full overflow-hidden rounded-2xl border border-border bg-card transition-colors duration-300 hover:border-accent/60"
       >
         <div className={spanWide ? 'grid gap-0 sm:grid-cols-[1fr_1.2fr]' : ''}>

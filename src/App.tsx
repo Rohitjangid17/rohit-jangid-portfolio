@@ -44,7 +44,7 @@ export default function App() {
           <Route path="/work/projects/:slug" element={<PageTransition><ProjectDetails /></PageTransition>} />
           <Route path="/sketches" element={<PageTransition><Sketches /></PageTransition>} />
           <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
-          <Route path="/blog-details/:slug" element={<PageTransition><BlogDetails /></PageTransition>} />
+          <Route path="/blog/blog-details/:slug" element={<PageTransition><BlogDetails /></PageTransition>} />
           <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>

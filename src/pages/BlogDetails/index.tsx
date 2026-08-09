@@ -63,47 +63,54 @@ function DetailHero({ post }: { post: PostDetail }) {
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.3] [background-image:linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black_35%,transparent_85%)]"
       />
-      <Container className="py-20 sm:py-24">
-        <Link to="/blog" className="inline-flex items-center gap-1.5 mono-label text-muted hover:text-accent transition-colors">
-          <ArrowLeft size={14} />
-          Back to Blog
-        </Link>
+      <Container className="relative flex min-h-[64vh] flex-col justify-center py-20 sm:min-h-[70vh]">
 
-        <motion.p
-          initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mono-label text-accent mt-8"
-        >
-          {post.category} · {post.readingTime} · {post.date}
-        </motion.p>
+        <div className="grid items-center gap-7 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+          <div>
+            <Link to="/blog" className="inline-flex items-center gap-1.5 mono-label text-muted hover:text-accent transition-colors">
+              <ArrowLeft size={14} />
+              Back to Blog
+            </Link>
 
-        <motion.h1
-          initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.08 }}
-          className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl"
-        >
-          {post.title}
-        </motion.h1>
+            <motion.p
+              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="mono-label text-accent mt-3 sm:mt-6"
+            >
+              {post.category} · {post.readingTime} · {post.date}
+            </motion.p>
 
-        <motion.p
-          initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.16 }}
-          className="mt-5 max-w-2xl text-lg leading-relaxed text-muted"
-        >
-          {post.summary}
-        </motion.p>
+            <motion.h1
+              initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08 }}
+              className="mt-3 sm:mt-6 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
+            >
+              {post.title}
+            </motion.h1>
 
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.24 }}
-          className="mt-10 max-w-md"
-        >
-          <TopicVisual category={post.category} large />
-        </motion.div>
+            <motion.p
+              initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.16 }}
+              className="mt-3 sm:mt-6 max-w-lg text-lg leading-relaxed text-muted"
+            >
+              {post.summary}
+            </motion.p>
+          </div>
+          <div>
+            <motion.div
+              initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.24 }}
+              className="mt-10 max-w-md"
+            >
+              <TopicVisual category={post.category} large />
+            </motion.div>
+          </div>
+        </div>
+
       </Container>
     </section>
   )
@@ -228,13 +235,13 @@ function ArticleBody({ post }: { post: PostDetail }) {
   const blocks = post.content ? parseContent(post.content) : [{ type: 'paragraph' as const, text: post.summary }]
 
   return (
-    <section className="py-16">
+    <section className="py-12 sm:py-16">
       <Container>
-        <Reveal className="mx-auto max-w-2xl space-y-6">
+        <Reveal className="mx-auto max-w-2xl space-y-3 sm:space-y-6">
           {blocks.map((block, i) => {
             if (block.type === 'heading') {
               return (
-                <h2 key={i} className="pt-4 text-xl font-semibold">
+                <h2 key={i} className="text-xl font-semibold">
                   {block.text}
                 </h2>
               )
@@ -269,7 +276,7 @@ function ArticleBody({ post }: { post: PostDetail }) {
 
 function RelatedArticles({ posts }: { posts: PostDetail[] }) {
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <p className="mono-label text-accent mb-8">Related articles</p>
         <div className="grid gap-5 sm:grid-cols-3">
@@ -299,12 +306,12 @@ function PrevNextNav({ prev, next }: { prev: PostDetail | null; next: PostDetail
   if (!prev && !next) return null
 
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <div className="grid gap-4 sm:grid-cols-2">
           {prev ? (
             <Link
-              to={`/blog/${prev.slug}`}
+              to={`/blog/blog-details/${prev.slug}`}
               className="group rounded-2xl border border-border bg-card p-6 transition-colors duration-300 hover:border-accent/60"
             >
               <p className="inline-flex items-center gap-1.5 mono-label text-muted">
@@ -318,7 +325,7 @@ function PrevNextNav({ prev, next }: { prev: PostDetail | null; next: PostDetail
           )}
           {next ? (
             <Link
-              to={`/blog/${next.slug}`}
+              to={`/blog/blog-details/${next.slug}`}
               className="group rounded-2xl border border-border bg-card p-6 text-right transition-colors duration-300 hover:border-accent/60"
             >
               <p className="inline-flex items-center gap-1.5 mono-label text-muted justify-end">
