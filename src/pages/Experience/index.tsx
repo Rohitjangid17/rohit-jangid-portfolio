@@ -85,6 +85,29 @@ function CareerPathGraphic({ reduceMotion, count }: { reduceMotion: boolean; cou
 
   return (
     <div className="relative aspect-square w-full">
+      <div className="absolute inset-8 rounded-2xl border border-border bg-card shadow-sm">
+        <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
+          <span className="h-2 w-2 rounded-full bg-muted/40" />
+          <span className="h-2 w-2 rounded-full bg-muted/40" />
+          <span className="h-2 w-2 rounded-full bg-muted/40" />
+          <span className="ml-auto mono-label text-[10px] text-muted">experience.tsx</span>
+        </div>
+        <div className="space-y-3 px-4 pt-4">
+          <div className="ml-auto max-w-[70%] rounded-lg rounded-br-sm border border-accent/40 bg-accent/10 px-3 py-2 text-xs text-accent">
+            From first role to production.
+          </div>
+          <div className="max-w-[70%] rounded-lg rounded-bl-sm border border-border bg-background/50 px-3 py-2 text-xs text-muted">
+            A journey built through real projects.
+            <motion.span
+              aria-hidden
+              className="ml-0.5 inline-block h-3 w-[1.5px] translate-y-[2px] bg-muted align-middle"
+              animate={reduceMotion ? { opacity: 1 } : { opacity: [1, 0, 1] }}
+              transition={reduceMotion ? {} : { duration: 1, repeat: Infinity, ease: 'steps(1)' }}
+            />
+          </div>
+        </div>
+      </div>
+
       <svg viewBox="0 0 360 280" className="absolute inset-8 h-[calc(100%-4rem)] w-[calc(100%-4rem)] overflow-visible" aria-hidden>
         <motion.path
           d={path}
@@ -109,10 +132,10 @@ function CareerPathGraphic({ reduceMotion, count }: { reduceMotion: boolean; cou
             transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
           />
         ))}
+        <div className="absolute -bottom-3 left-4 rounded-full border border-border bg-card px-3 py-1.5 mono-label text-[10px] text-muted shadow-sm">
+          {count} role{count === 1 ? '' : 's'} &middot; production shipped
+        </div>
       </svg>
-      <div className="absolute -bottom-3 left-4 rounded-full border border-border bg-card px-3 py-1.5 mono-label text-[10px] text-muted shadow-sm">
-        {count} role{count === 1 ? '' : 's'} &middot; production shipped
-      </div>
     </div>
   )
 }
