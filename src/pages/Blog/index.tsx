@@ -28,7 +28,7 @@ export default function Blog() {
     <>
       <BlogHero />
 
-      <section className="py-12 border-t border-border">
+      <section className="py-12 sm:py-16 border-t border-border">
         <Container>
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
             <SearchBar query={query} setQuery={setQuery} />
@@ -44,12 +44,12 @@ export default function Blog() {
               transition={{ duration: 0.25 }}
             >
               {filtered.length === 0 ? (
-                <p className="mt-16 text-center text-muted">No articles found.</p>
+                <p className="mt-8 sm:mt-16 text-center text-muted">No articles found.</p>
               ) : (
                 <>
                   {featured && <FeaturedPost post={featured} />}
                   {rest.length > 0 && (
-                    <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="mt-4 sm:mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                       {rest.map((p, i) => (
                         <PostCard key={p.slug} post={p} index={i} />
                       ))}
@@ -79,7 +79,7 @@ function BlogHero() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35] [background-image:linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black_35%,transparent_85%)]"
       />
       <Container className="relative flex min-h-[64vh] flex-col justify-center py-20 sm:min-h-[70vh]">
-        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid items-center gap-7 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 8 }}
@@ -87,14 +87,14 @@ function BlogHero() {
               transition={{ duration: 0.5 }}
               className="mono-label text-accent"
             >
-              BLOG / 07
+              BLOG
             </motion.p>
 
             <motion.h1
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08 }}
-              className="mt-5 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
+              className="mt-3 sm:mt-6 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
             >
               Thoughts from the frontend.
             </motion.h1>
@@ -103,7 +103,7 @@ function BlogHero() {
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.16 }}
-              className="mt-6 max-w-lg text-lg leading-relaxed text-muted"
+              className="mt-3 sm:mt-6 max-w-lg text-lg leading-relaxed text-muted"
             >
               Practical notes, engineering lessons and things I learn while
               building real products.
@@ -340,7 +340,7 @@ function TopicVisual({ category, large = false }: { category: string; large?: bo
 
 function FeaturedPost({ post }: { post: Post }) {
   return (
-    <Reveal className="mt-10">
+    <Reveal className="mt-6 sm:mt-12">
       <Link
         to={`/blog/${post.slug}`}
         className="group grid gap-0 overflow-hidden rounded-2xl border border-border bg-card transition-colors duration-300 hover:border-accent/60 lg:grid-cols-[1.1fr_1fr]"
