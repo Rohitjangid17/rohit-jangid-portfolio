@@ -49,14 +49,14 @@ export default function Sketches() {
     <>
       <SketchesHero />
 
-      <section className="py-12 border-t border-border">
+      <section className="py-12 sm:py-16 border-t border-border">
         <Container>
           {items.length === 0 ? (
             <EmptyState />
           ) : (
             <div>
               {featured && (
-                <Reveal className="mb-6">
+                <Reveal className="mb-4 sm:mb-6">
                   <SketchTile item={featured} onOpen={() => setActiveIndex(0)} large />
                 </Reveal>
               )}
@@ -98,7 +98,7 @@ function SketchesHero() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.3] [background-image:linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black_35%,transparent_85%)]"
       />
       <Container className="relative flex min-h-[64vh] flex-col justify-center py-20 sm:min-h-[70vh]">
-        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid items-center gap-7 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 8 }}
@@ -106,14 +106,14 @@ function SketchesHero() {
               transition={{ duration: 0.5 }}
               className="mono-label text-accent"
             >
-              SKETCHES / 05
+              SKETCHES
             </motion.p>
 
             <motion.h1
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08 }}
-              className="mt-5 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
+              className="mt-3 sm:mt-6 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
             >
               Where code meets creativity.
             </motion.h1>
@@ -122,7 +122,7 @@ function SketchesHero() {
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.16 }}
-              className="mt-6 max-w-lg text-lg leading-relaxed text-muted"
+              className="mt-3 sm:mt-6 max-w-lg text-lg leading-relaxed text-muted"
             >
               A collection of pencil sketches and visual experiments created
               outside the editor.
