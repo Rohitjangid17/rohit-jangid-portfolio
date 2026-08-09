@@ -10,7 +10,7 @@ export default function Footer() {
   const links = navItems.flatMap((item) => (item.children ? item.children : [{ label: item.label, path: item.path! }]))
 
   return (
-    <footer className="border-t border-border mt-32">
+    <footer className="border-t border-border">
       <Container className="py-8 lg:py-10">
         <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
           <div>

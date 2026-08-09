@@ -56,7 +56,7 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: '3+', label: 'Years Experience' },
+  { value: '2.10+', label: 'Years Experience' },
   { value: `${experience.length}`, label: 'Companies' },
   { value: `${projects.length}+`, label: 'Projects' },
   { value: 'Multiple', label: 'Production Modules' },
@@ -213,18 +213,17 @@ export default function Home() {
               className="mt-8 flex flex-wrap justify-center gap-3"
             >
               <Button to="/work/projects">Explore My Work</Button>
-              <Button variant="secondary" to="/contact">View Resume</Button>
-              <Button variant="ghost" to="/contact">Let's Talk</Button>
+              <Button variant="secondary" to="/contact">Let's Talk</Button>
             </motion.div>
           </div>
         </Container>
       </section>
 
       {/* Recruiter Snapshot — split "profile.json" terminal + stat rail */}
-      <section className="py-20 sm:py-28">
+      <section className="py-12 sm:py-16">
         <Container>
-          <SectionHeading label="01 / Snapshot" title="The short version" />
-          <div className="mt-10 grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-stretch">
+          <SectionHeading label="Snapshot" title="The short version" />
+          <div className="mt-5 sm:mt-10 grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-stretch">
             <Reveal>
               <div className="relative h-full rounded-2xl border border-border bg-background overflow-hidden">
                 <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
@@ -262,10 +261,10 @@ export default function Home() {
                   ['Status', 'Open to new opportunities'],
                 ] as [string, string][]
               ).map(([label, value], i) => (
-                <Reveal key={label} delay={i * 0.08} className="relative pb-8 last:pb-0">
+                <Reveal key={label} delay={i * 0.08} className="relative pb-4 sm:pb-8 last:pb-0">
                   <span aria-hidden className="absolute -left-6 top-1.5 h-2 w-2 rounded-full border-2 border-accent bg-background sm:-left-8" />
                   <p className="mono-label text-muted">{label}</p>
-                  <p className="mt-1.5 text-lg font-medium">{value}</p>
+                  <p className="mt-1.5 text-base sm:text-lg font-medium">{value}</p>
                 </Reveal>
               ))}
             </div>
@@ -274,16 +273,16 @@ export default function Home() {
       </section>
 
       {/* Stats — asymmetric metrics rail */}
-      <section className="py-20 sm:py-28 border-t border-border">
+      <section className="py-12 sm:py-16 border-t border-border">
         <Container>
-          <SectionHeading label="02 / Stats" title="By the numbers" />
-          <div className="relative mt-14">
+          <SectionHeading label="Stats" title="By the numbers" />
+          <div className="relative mt-8 sm:mt-14">
             <div aria-hidden className="absolute left-0 right-0 top-2 hidden h-px bg-border sm:block" />
             <div className="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-4">
               {stats.map((s, i) => (
                 <Reveal key={s.label} delay={i * 0.1} className="relative">
                   <span aria-hidden className="relative z-10 hidden h-2 w-2 rounded-full bg-accent sm:block" />
-                  <p className={`mt-4 font-semibold tracking-tight ${i === 0 ? 'text-5xl sm:text-6xl text-accent' : 'text-4xl sm:text-5xl'}`}>
+                  <p className={`font-semibold tracking-tight ${i === 0 ? 'text-3xl sm:text-5xl text-accent' : 'text-2xl sm:text-4xl'}`}>
                     {s.value}
                   </p>
                   <p className="mt-2 mono-label text-muted">{s.label}</p>
@@ -295,28 +294,14 @@ export default function Home() {
       </section>
 
       {/* Tech Stack — interactive radial connection graph */}
-      <section className="relative overflow-hidden border-t border-border py-16 sm:py-20">
+      <section className="relative overflow-hidden border-t border-border py-12 sm:py-16">
         <Container>
           <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
 
             {/* Tech List */}
             <div className="min-w-0">
-              <Reveal>
-                <p className="mono-label mb-3 text-accent">
-                  Tech Stack
-                </p>
-
-                <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-                  Tools I build with
-                </h2>
-
-                <p className="mt-3 max-w-lg text-sm leading-relaxed text-muted sm:text-base">
-                  A focused toolkit centered on Angular and React, extended with the
-                  ecosystem needed to design, build and ship production interfaces.
-                </p>
-              </Reveal>
-
-              <div className="mt-8">
+              <SectionHeading label="Tech Stack" title="Tools I build with" subtitle="A focused toolkit centered on Angular and React, extended with the ecosystem needed to design, build and ship production interfaces." />
+              <div className="mt-4 sm:mt-8">
                 {coreTech.map((t, i) => (
                   <Reveal key={t.name} delay={i * 0.04}>
                     <button
@@ -341,8 +326,8 @@ export default function Home() {
 
             {/* Radial Graph */}
             <Reveal delay={0.1}>
-              <div className="relative mx-auto w-full max-w-[420px] overflow-hidden">
-                <div className="relative aspect-square w-full overflow-hidden rounded-3xl border border-border bg-card/30">
+              <div className="relative mx-auto w-full max-w-[420px]">
+                <div className="relative aspect-square w-full rounded-3xl border border-border bg-card/30">
 
                   {/* Decorative grid */}
                   <div
@@ -424,7 +409,7 @@ export default function Home() {
                         onMouseLeave={() => setHoveredTech(null)}
                       >
                         <div
-                          className={`flex h-11 w-11 cursor-default items-center justify-center rounded-full border bg-background px-1 text-center text-[9px] font-medium transition-all duration-200 sm:h-14 sm:w-14 sm:text-[11px] ${active
+                          className={`flex h-14 w-14 cursor-default items-center justify-center rounded-full border bg-background p-1 text-center text-[9px] font-medium transition-all duration-200 sm:h-16 sm:w-16 sm:text-[11px] ${active
                               ? '-translate-y-0.5 border-accent text-accent shadow-lg'
                               : 'border-border text-foreground'
                             }`}
@@ -447,16 +432,16 @@ export default function Home() {
       </section>
 
       {/* Featured Projects — editorial, browser-chrome style previews */}
-      <section className="py-20 sm:py-28 border-t border-border">
+      <section className="py-12 sm:py-16 border-t border-border">
         <Container>
           <div className="flex items-end justify-between flex-wrap gap-4">
-            <SectionHeading label="04 / Work" title="Featured projects" />
+            <SectionHeading label="Work" title="Featured projects" />
             <Link to="/work/projects" className="mono-label text-accent flex items-center gap-1 hover:gap-2 transition-all">
               View All Projects <ArrowUpRight size={14} />
             </Link>
           </div>
 
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          <div className="mt-6 sm:mt-12 grid gap-6 lg:grid-cols-2">
             {featured.map((p, i) => (
               <Reveal key={p.slug} delay={i * 0.08} className={i === 0 ? 'lg:col-span-2' : ''}>
                 <Link
@@ -487,12 +472,12 @@ export default function Home() {
       </section>
 
       {/* Career — interactive timeline */}
-      <section className="py-20 sm:py-28">
+      <section className="py-12 sm:py-16 border-t border-border">
         <Container>
           <SectionHeading label="05 / Career" title="Where I've built" />
-          <div className="relative mt-16">
+          <div className="relative mt-8 sm:mt-16">
             <div aria-hidden className="absolute left-0 right-0 top-4 hidden h-px bg-border sm:block" />
-            <div className="grid gap-8 sm:grid-cols-[repeat(auto-fit,minmax(160px,1fr))]">
+            <div className="grid gap-4 sm:gap-8 sm:grid-cols-[repeat(auto-fit,minmax(160px,1fr))]">
               {typedExperience.map((e, i) => (
                 <Reveal key={e.id} delay={i * 0.08} className="group relative">
                   <div className="flex items-center gap-3 sm:block">
@@ -500,7 +485,7 @@ export default function Home() {
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <div>
-                      <p className="text-lg font-medium transition-colors group-hover:text-accent">{e.company}</p>
+                      <p className="text-base sm:text-lg font-medium transition-colors group-hover:text-accent">{e.company}</p>
                       {e.role && <p className="mt-1 text-sm text-muted">{e.role}</p>}
                       {(e.duration || e.period || e.year) && (
                         <p className="mono-label mt-1 text-muted">{e.duration || e.period || e.year}</p>
@@ -515,10 +500,10 @@ export default function Home() {
       </section>
 
       {/* Why Work With Me — circuit-style schematic */}
-      <section className="py-20 sm:py-28 border-t border-border">
+      <section className="py-12 sm:py-16 border-t border-border">
         <Container>
-          <SectionHeading label="06 / Approach" title="Why work with me" />
-          <div className="relative mx-auto mt-16 max-w-3xl">
+          <SectionHeading label="Approach" title="Why work with me" />
+          <div className="relative mx-auto mt-6 sm:mt-12 max-w-3xl">
             <div aria-hidden className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-border" />
             <div className="flex flex-col gap-1">
               {strengths.map((s, i) => {
@@ -551,15 +536,15 @@ export default function Home() {
       </section>
 
       {/* Blog Preview — editorial numbered list */}
-      <section className="py-20 sm:py-28">
+      <section className="py-12 sm:py-16 border-t border-border">
         <Container>
           <div className="flex items-end justify-between flex-wrap gap-4">
-            <SectionHeading label="07 / Writing" title="From the blog" />
+            <SectionHeading label="Writing" title="From the blog" />
             <Link to="/blog" className="mono-label text-accent flex items-center gap-1 hover:gap-2 transition-all">
               Read All Articles <ArrowUpRight size={14} />
             </Link>
           </div>
-          <div className="mt-12 divide-y divide-border border-t border-b border-border">
+          <div className="mt-6 sm:mt-12 divide-y divide-border">
             {typedBlogPosts.slice(0, 2).map((post, i) => (
               <Reveal key={post.slug} delay={i * 0.08}>
                 <Link
@@ -586,19 +571,19 @@ export default function Home() {
       </section>
 
       {/* Final CTA — minimal, mouse-reactive graphic */}
-      <section className="py-28 sm:py-36">
+      <section className="py-12 sm:py-16 border-t border-border">
         <Container>
-          <Reveal className="group relative overflow-hidden rounded-3xl border border-border bg-card px-8 py-20 text-center">
+          <Reveal className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 text-center">
             <CtaField />
             <div className="relative">
-              <p className="mono-label text-accent">08 / Contact</p>
-              <h2 className="mt-4 text-3xl sm:text-4xl font-semibold tracking-tight max-w-2xl mx-auto">
+              <p className="mono-label text-accent">Contact</p>
+              <h2 className="mt-2 sm:mt-4 text-3xl sm:text-4xl font-semibold tracking-tight max-w-2xl mx-auto">
                 Have a product that deserves a great frontend?
               </h2>
-              <p className="mt-4 text-muted max-w-md mx-auto">
+              <p className="mt-2 sm:mt-4 text-muted max-w-md mx-auto">
                 Let's build something fast, useful and memorable.
               </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <div className="mt-4 sm:mt-8 flex flex-wrap justify-center gap-3">
                 <Button to="/contact">Start a Conversation</Button>
                 <Button variant="secondary" to="/contact">View Resume</Button>
               </div>
