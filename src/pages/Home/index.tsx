@@ -181,9 +181,9 @@ export default function Home() {
         <Container className="pt-[7rem] pb-16 sm:py-24">
           <div className="mx-auto max-w-2xl text-center">
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-              <span className="mono-label inline-flex items-center gap-1.5 rounded-full border border-success/30 bg-success/10 px-3 py-1 text-success">
+              <span className="mono-label inline-flex items-center gap-1.5 rounded-full border border-success/30 bg-success/10 px-3 py-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse" />
-                Available for Frontend Engineer Opportunities
+                <span className='text-success'>Available for Frontend Engineer Opportunities</span>
               </span>
             </motion.div>
 

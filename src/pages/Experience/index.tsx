@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import Container from '@/components/common/Container'
 import SectionHeading from '@/components/common/SectionHeading'
 import Reveal from '@/components/common/Reveal'
@@ -125,82 +126,238 @@ function ExperienceTimeline() {
     <section className="py-16 border-t border-border">
       <Container>
         <SectionHeading label="Journey" title="Career timeline" />
-        <div className="mt-12 divide-y divide-border">
-          {experience.map((e, i) => (
-            <Reveal key={e.id} delay={i * 0.06} className="grid gap-6 py-10 first:pt-0 lg:grid-cols-[220px_1fr] lg:gap-12">
-              {/* left: identity */}
-              <div>
-                <span className="mono-label text-[11px] text-accent">0{i + 1}</span>
-                <p className="mt-3 text-xl font-semibold">{e.company}</p>
-                <p className="mt-1 text-sm font-medium text-accent">{e.role}</p>
-                <p className="mt-4 text-sm text-muted">{e.period}</p>
-                <p className="text-sm text-muted">
-                  {e.location} · {e.employmentType}
-                </p>
-                <div className="mt-5 flex flex-wrap gap-x-3 gap-y-1.5">
-                  {e.technologies.map((t) => (
-                    <span key={t} className="text-xs text-muted">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
+        <div className="relative mt-14">
+          <div aria-hidden className="absolute left-4 top-2 bottom-2 hidden w-px bg-border lg:block" />
+          <div className="space-y-20">
+            {experience.map((e, i) => (
+              <Reveal key={e.id} delay={i * 0.06} className="relative lg:pl-16">
+                <TimelineNode index={i} />
 
-              {/* right: detail */}
-              <div>
-                <p className="text-sm leading-relaxed text-muted max-w-xl">{e.summary}</p>
-
-                <div className="mt-7 grid gap-6 sm:grid-cols-2">
-                  {e.responsibilities.map((r) => (
-                    <div key={r.group}>
-                      <p className="mono-label text-[11px] text-muted mb-2.5">{r.group}</p>
-                      <ul className="space-y-1.5">
-                        {r.items.map((item) => (
-                          <li key={item} className="text-sm text-muted leading-relaxed pl-3 relative before:absolute before:left-0 before:top-[0.6em] before:h-1 before:w-1 before:rounded-full before:bg-accent/50">
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+                  <div>
+                    <p className="text-xl font-semibold">{e.company}</p>
+                    <p className="mt-1 text-sm font-medium text-accent">{e.role}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm text-muted">{e.period}</p>
+                    <p className="text-sm text-muted">
+                      {e.location} · {e.employmentType}
+                    </p>
+                  </div>
                 </div>
+
+                <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted">{e.summary}</p>
+
+                <RoleTechWork role={e.role} technologies={e.technologies} responsibilities={e.responsibilities} />
+
+                <ResponsibilityAccordion responsibilities={e.responsibilities} />
 
                 {e.id === 'cynosure' && <AwardCard />}
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            ))}
+          </div>
         </div>
       </Container>
     </section>
   )
 }
 
-function AwardCard() {
+function TimelineNode({ index }: { index: number }) {
   return (
-    <div className="mt-7 border-l-2 border-accent/40 pl-5">
-      <p className="mono-label text-accent mb-2">Recognition</p>
-      <p className="text-lg font-semibold">{award.title}</p>
-      <p className="text-sm text-muted mt-1">{award.company}</p>
-      <p className="mt-3 text-sm text-muted leading-relaxed max-w-md">{award.description}</p>
-      {/* TODO: drop award photo at src/assets/award/ and render it here */}
+    <motion.span
+      aria-hidden
+      className="absolute left-4 top-1 hidden h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full border border-border bg-background mono-label text-[11px] lg:flex"
+      initial={{ scale: 0.6, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.35, delay: index * 0.06 }}
+    >
+      0{index + 1}
+    </motion.span>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Role → Technologies → Engineering Work                              */
+/* ------------------------------------------------------------------ */
+
+function RoleTechWork({
+  role,
+  technologies,
+  responsibilities,
+}: {
+  role: string
+  technologies: string[]
+  responsibilities: { group: string; items: string[] }[]
+}) {
+  const workStages = responsibilities.map((r) => r.group)
+
+  return (
+    <div className="mt-8 overflow-x-auto">
+      <div className="flex min-w-max items-stretch gap-6">
+        <FlowStage label="Role" value={role} />
+        <FlowArrow />
+        <FlowStage label="Technologies" chips={technologies} />
+        <FlowArrow />
+        <FlowStage label="Engineering Work" chips={workStages} />
+      </div>
+    </div>
+  )
+}
+
+function FlowStage({ label, value, chips }: { label: string; value?: string; chips?: string[] }) {
+  return (
+    <div className="flex w-48 shrink-0 flex-col gap-2 border-l-2 border-accent/30 pl-4">
+      <p className="mono-label text-[10px] text-muted">{label}</p>
+      {value && <p className="text-sm font-medium text-accent">{value}</p>}
+      {chips && (
+        <p className="text-xs leading-relaxed text-muted">{chips.join(' · ')}</p>
+      )}
+    </div>
+  )
+}
+
+function FlowArrow() {
+  return (
+    <div className="flex w-6 shrink-0 items-center justify-center text-border">
+      <svg viewBox="0 0 24 16" className="h-3.5 w-6" fill="none" stroke="currentColor" strokeWidth="1.3">
+        <path d="M1 8 H20 M15 3 L20 8 L15 13" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
     </div>
   )
 }
 
 /* ------------------------------------------------------------------ */
-/* Lessons learned                                                     */
+/* Expandable responsibilities                                         */
+/* ------------------------------------------------------------------ */
+
+function ResponsibilityAccordion({ responsibilities }: { responsibilities: { group: string; items: string[] }[] }) {
+  const [open, setOpen] = useState<number | null>(0)
+  const reduceMotion = useReducedMotion()
+
+  return (
+    <div className="mt-8 divide-y divide-border border-t border-border">
+      {responsibilities.map((r, i) => {
+        const isOpen = open === i
+        const panelId = `resp-panel-${r.group.replace(/\s+/g, '-')}-${i}`
+        return (
+          <div key={r.group}>
+            <button
+              type="button"
+              onClick={() => setOpen(isOpen ? null : i)}
+              aria-expanded={isOpen}
+              aria-controls={panelId}
+              className="flex w-full items-center justify-between gap-4 py-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 rounded-sm"
+            >
+              <span className="flex items-center gap-3">
+                <span className="mono-label text-[11px] text-accent">0{i + 1}</span>
+                <span className="text-sm font-medium">{r.group}</span>
+              </span>
+              <span className="flex items-center gap-2.5 text-xs text-muted">
+                {r.items.length} item{r.items.length === 1 ? '' : 's'}
+                <motion.span
+                  animate={{ rotate: isOpen ? 45 : 0 }}
+                  transition={{ duration: 0.25 }}
+                  className="text-base leading-none text-accent"
+                >
+                  +
+                </motion.span>
+              </span>
+            </button>
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  id={panelId}
+                  initial={reduceMotion ? false : { height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={reduceMotion ? {} : { height: 0, opacity: 0 }}
+                  transition={{ duration: 0.25, ease: 'easeInOut' }}
+                  className="overflow-hidden"
+                >
+                  <ul className="space-y-1.5 pb-5 pl-6">
+                    {r.items.map((item) => (
+                      <li
+                        key={item}
+                        className="relative pl-3 text-sm leading-relaxed text-muted before:absolute before:left-0 before:top-[0.6em] before:h-1 before:w-1 before:rounded-full before:bg-accent/50"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Cynosure recognition                                                */
+/* ------------------------------------------------------------------ */
+
+function TrophyIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M8 21h8M12 17v4M6 3h12v4a6 6 0 0 1-12 0V3Z" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6 5H3v2a3 3 0 0 0 3 3M18 5h3v2a3 3 0 0 1-3 3" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function AwardCard() {
+  const [imgFailed, setImgFailed] = useState(false)
+  // Optional — only used if your `award` data includes an image path.
+  const awardImage = (award as { image?: string }).image
+
+  return (
+    <Reveal className="mt-10 border-l-2 border-accent/40 pl-5 sm:pl-6">
+      <p className="mono-label text-accent mb-3">Recognition</p>
+      <div className="flex items-start gap-4">
+        {awardImage && !imgFailed ? (
+          <img
+            src={awardImage}
+            alt={award.title}
+            className="h-14 w-14 shrink-0 rounded-lg border border-border object-cover"
+            onError={() => setImgFailed(true)}
+          />
+        ) : (
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg border border-accent/30 bg-accent/5 text-accent">
+            <TrophyIcon />
+          </span>
+        )}
+        <div>
+          <p className="text-lg font-semibold">{award.title}</p>
+          <p className="text-sm text-muted mt-1">{award.company}</p>
+        </div>
+      </div>
+      <p className="mt-4 max-w-md text-sm leading-relaxed text-muted">{award.description}</p>
+      {/* TODO: add an `image` field to the award data (or drop a photo at
+          src/assets/award/ and point `awardImage` at it) to show it here. */}
+    </Reveal>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Lessons learned — field notes                                       */
 /* ------------------------------------------------------------------ */
 
 function LessonsLearned() {
   return (
     <section className="py-16 border-t border-border">
       <Container>
-        <SectionHeading label="Reflection" title="What these years taught me" />
-        <div className="mt-10 max-w-2xl divide-y divide-border border-t border-border">
+        <SectionHeading label="Field Notes" title="What these years taught me" />
+        <div className="mt-10 max-w-2xl">
           {lessonsLearned.map((l, i) => (
-            <Reveal key={l} delay={i * 0.06} className="grid grid-cols-[3rem_1fr] gap-4 py-5">
-              <span className="mono-label text-muted">N&deg;{String(i + 1).padStart(2, '0')}</span>
-              <p className="text-sm text-muted leading-relaxed">{l}</p>
+            <Reveal
+              key={l}
+              delay={i * 0.06}
+              className="group flex gap-5 border-l-2 border-border py-5 pl-6 transition-colors duration-300 hover:border-accent/50"
+            >
+              <span className="mono-label shrink-0 text-muted">N&deg;{String(i + 1).padStart(2, '0')}</span>
+              <p className="text-sm leading-relaxed text-muted">{l}</p>
             </Reveal>
           ))}
         </div>
