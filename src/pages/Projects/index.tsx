@@ -25,7 +25,7 @@ export default function Projects() {
     <>
       <ProjectsHero />
 
-      <section className="py-10 border-t border-border">
+      <section className="py-12 sm:py-16 border-t border-border">
         <Container>
           <FilterBar filter={filter} setFilter={setFilter} />
 
@@ -64,7 +64,7 @@ function ProjectsHero() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35] [background-image:linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black_35%,transparent_85%)]"
       />
       <Container className="relative flex min-h-[64vh] flex-col justify-center py-20 sm:min-h-[70vh]">
-        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid items-center gap-7 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 8 }}
@@ -79,7 +79,7 @@ function ProjectsHero() {
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08 }}
-              className="mt-5 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
+              className="mt-3 sm:mt-6 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
             >
               Selected work, built for real users.
             </motion.h1>
@@ -88,7 +88,7 @@ function ProjectsHero() {
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.16 }}
-              className="mt-6 max-w-lg text-lg leading-relaxed text-muted"
+              className="mt-3 sm:mt-6 max-w-lg text-lg leading-relaxed text-muted"
             >
               A collection of production-focused frontend work across enterprise
               platforms, dashboards and product experiences.
