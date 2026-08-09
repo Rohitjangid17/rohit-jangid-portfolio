@@ -262,7 +262,7 @@ function CareerJourney() {
         <SectionHeading label="Journey" title="Career timeline" />
         <div className="relative mt-6 sm:mt-12">
           <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border sm:left-[199px]" />
-          <div className="space-y-10">
+          <div className="space-y-5 sm:space-y-10">
             {timeline.map((e, i) => (
               <Reveal
                 key={e.id}
@@ -325,7 +325,7 @@ function Philosophy() {
         <div className="relative mt-6 sm:mt-12">
           <div className="absolute left-3 top-3 bottom-3 w-px bg-border sm:hidden" />
           <div className="hidden sm:block absolute left-0 right-0 top-3 h-px bg-border" />
-          <div className="grid gap-8 sm:grid-cols-5">
+          <div className="grid gap-4 sm:gap-8 sm:grid-cols-5">
             {philosophy.map((p, i) => (
               <Reveal key={p} delay={i * 0.07} className="relative pl-9 sm:pl-0">
                 <span className="absolute left-0 top-1 h-6 w-6 -translate-x-1/2 rounded-full border border-accent/50 bg-background sm:static sm:mb-4 sm:translate-x-0 sm:flex sm:items-center sm:justify-center">
@@ -365,7 +365,7 @@ function HowIWork() {
             style={{ width: '100%' }}
           />
 
-          <div className="grid gap-8 lg:grid-cols-7">
+          <div className="grid gap-4 sm:gap-8 lg:grid-cols-7">
             {workflow.map(([step, desc], i) => (
               <Reveal
                 key={step}
@@ -505,7 +505,7 @@ function Faq() {
     <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="FAQ" title="Common questions" />
-        <div className="mt-10 divide-y divide-border border-t border-b border-border">
+        <div className="mt-5 sm:mt-10 divide-y divide-border border-t border-b border-border">
           {faqs.map(([q, a], i) => {
             const isOpen = open === i
             const panelId = `about-faq-panel-${i}`
@@ -565,7 +565,7 @@ function LessonsLearned() {
     <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="Reflection" title="What these years taught me" />
-        <div className="mt-6 sm:mt-12 max-w-2xl divide-y divide-border border-t border-border">
+        <div className="mt-5 sm:mt-10 max-w-2xl divide-y divide-border border-t border-border">
           {lessonsLearned.map((l, i) => (
             <Reveal key={l} delay={i * 0.06} className="grid grid-cols-[3rem_1fr] gap-4 py-5">
               <span className="mono-label text-muted">N&deg;{String(i + 1).padStart(2, '0')}</span>
