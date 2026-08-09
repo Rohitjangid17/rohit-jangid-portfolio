@@ -179,20 +179,23 @@ function FilterBar({
   setFilter: (f: (typeof projectFilters)[number]) => void
 }) {
   return (
-    <div className="flex flex-wrap gap-2 rounded-full border border-border bg-card p-1.5 sm:inline-flex">
+    <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
       {projectFilters.map((f) => {
         const isActive = filter === f
         return (
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`relative rounded-full px-4 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${isActive ? 'text-accent' : 'text-muted hover:text-foreground'
-              }`}
+            className={`relative rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
+              isActive
+                ? 'border-accent/40 text-accent'
+                : 'border-border text-muted hover:text-foreground hover:border-foreground/30'
+            }`}
           >
             {isActive && (
               <motion.span
                 layoutId="project-filter-pill"
-                className="absolute inset-0 -z-10 rounded-full bg-accent/10 border border-accent/40"
+                className="absolute inset-0 -z-10 rounded-full bg-accent/10"
                 transition={{ type: 'spring', stiffness: 380, damping: 32 }}
               />
             )}
