@@ -47,7 +47,7 @@ function TechStackHero() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35] [background-image:linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black_35%,transparent_85%)]"
       />
       <Container className="relative flex min-h-[64vh] flex-col justify-center py-20 sm:min-h-[70vh]">
-        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid items-center gap-7 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 8 }}
@@ -55,14 +55,14 @@ function TechStackHero() {
               transition={{ duration: 0.5 }}
               className="mono-label text-accent"
             >
-              TECH STACK / 02
+              TECH STACK
             </motion.p>
 
             <motion.h1
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08 }}
-              className="mt-5 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
+              className="mt-3 sm:mt-6 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
             >
               The tools behind the interfaces.
             </motion.h1>
@@ -71,7 +71,7 @@ function TechStackHero() {
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.16 }}
-              className="mt-6 max-w-lg text-lg leading-relaxed text-muted"
+              className="mt-3 sm:mt-6 max-w-lg text-lg leading-relaxed text-muted"
             >
               A practical toolkit built around scalable frontend architecture,
               responsive UI and production-ready development.
@@ -194,77 +194,165 @@ function EcosystemDiagram() {
   )
 
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="Overview" title="The technology ecosystem" />
 
         {/* diagram — sm and up */}
-        <div className="mt-12 hidden sm:block">
-          <div className="relative mx-auto h-[380px] w-full max-w-2xl">
-            <svg viewBox="0 0 360 360" className="absolute inset-0 h-full w-full overflow-visible" aria-hidden>
+        {/* diagram — sm and up */}
+        <div className="mt-8 hidden sm:block">
+          <div className="mx-auto w-full max-w-[560px]">
+            <div className="relative mx-auto aspect-square w-full">
+
+              {/* SVG connection lines */}
+              <svg
+                viewBox="0 0 360 360"
+                preserveAspectRatio="xMidYMid meet"
+                className="pointer-events-none absolute inset-0 h-full w-full"
+                aria-hidden
+              >
+                {items.map((item, i) => {
+                  const angle =
+                    (i / items.length) * Math.PI * 2 - Math.PI / 2
+
+                  const x = center + radius * Math.cos(angle)
+                  const y = center + radius * Math.sin(angle)
+                  const isActive = active === i
+
+                  return (
+                    <motion.line
+                      key={item.name}
+                      x1={center}
+                      y1={center}
+                      x2={x}
+                      y2={y}
+                      strokeWidth={isActive ? 1.75 : 1}
+                      className={
+                        isActive
+                          ? 'stroke-accent'
+                          : 'stroke-border'
+                      }
+                      initial={
+                        reduceMotion
+                          ? false
+                          : { pathLength: 0 }
+                      }
+                      whileInView={{ pathLength: 1 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        duration: 0.8,
+                        delay: i * 0.06,
+                      }}
+                    />
+                  )
+                })}
+              </svg>
+
+              {/* Center */}
+              <div
+                className="
+          absolute left-1/2 top-1/2 z-10
+          flex h-24 w-24
+          -translate-x-1/2 -translate-y-1/2
+          flex-col items-center justify-center
+          rounded-full
+          border border-accent/40
+          bg-card
+          text-center
+          shadow-sm
+        "
+              >
+                <p className="mono-label text-[9px] leading-tight text-accent">
+                  FRONTEND
+                </p>
+                <p className="mono-label text-[9px] leading-tight text-accent">
+                  ENGINEERING
+                </p>
+              </div>
+
+              {/* Technology nodes */}
               {items.map((item, i) => {
-                const angle = (i / items.length) * Math.PI * 2 - Math.PI / 2
+                const angle =
+                  (i / items.length) * Math.PI * 2 - Math.PI / 2
+
                 const x = center + radius * Math.cos(angle)
                 const y = center + radius * Math.sin(angle)
                 const isActive = active === i
+
                 return (
-                  <motion.line
+                  <button
                     key={item.name}
-                    x1={center}
-                    y1={center}
-                    x2={x}
-                    y2={y}
-                    strokeWidth={isActive ? 1.75 : 1}
-                    className={isActive ? 'stroke-accent' : 'stroke-border'}
-                    initial={reduceMotion ? false : { pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: i * 0.06 }}
-                  />
+                    type="button"
+                    onMouseEnter={() => setActive(i)}
+                    onFocus={() => setActive(i)}
+                    onMouseLeave={() => setActive(null)}
+                    onBlur={() => setActive(null)}
+                    className={`
+              absolute z-20
+              -translate-x-1/2
+              -translate-y-1/2
+              whitespace-nowrap
+              rounded-full
+              border
+              px-3.5 py-2
+              text-xs
+              font-medium
+              shadow-sm
+              transition-all
+              duration-200
+              focus-visible:outline-none
+              focus-visible:ring-2
+              focus-visible:ring-accent/60
+              ${isActive
+                        ? 'border-accent bg-accent/10 text-accent shadow-md'
+                        : 'border-border bg-card text-foreground hover:border-accent/50'
+                      }
+            `}
+                    style={{
+                      left: `${(x / 360) * 100}%`,
+                      top: `${(y / 360) * 100}%`,
+                    }}
+                  >
+                    {item.name}
+                  </button>
                 )
               })}
-            </svg>
-
-            <div className="absolute left-1/2 top-1/2 flex h-24 w-24 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-accent/40 bg-card text-center shadow-sm">
-              <p className="mono-label text-[9px] leading-tight text-accent">FRONTEND</p>
-              <p className="mono-label text-[9px] leading-tight text-accent">ENGINEERING</p>
             </div>
 
-            {items.map((item, i) => {
-              const angle = (i / items.length) * Math.PI * 2 - Math.PI / 2
-              const x = center + radius * Math.cos(angle)
-              const y = center + radius * Math.sin(angle)
-              const isActive = active === i
-              return (
-                <button
-                  key={item.name}
-                  type="button"
-                  onMouseEnter={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  onMouseLeave={() => setActive(null)}
-                  onBlur={() => setActive(null)}
-                  className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full border px-3 py-1.5 text-xs font-medium shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
-                    isActive ? 'border-accent bg-accent/10 text-accent' : 'border-border bg-card text-foreground'
-                  }`}
-                  style={{ left: x, top: y }}
-                >
-                  {item.name}
-                </button>
-              )
-            })}
-          </div>
-
-          <div className="mx-auto mt-8 h-12 max-w-md text-center text-sm text-muted leading-relaxed">
-            {active !== null ? items[active].description : 'Hover a technology to see how it fits in.'}
+            {/* Description */}
+            <div className="mx-auto mt-4 sm:mt-6 min-h-[48px] max-w-md px-4 text-center">
+              <motion.p
+                key={active ?? 'default'}
+                initial={
+                  reduceMotion
+                    ? false
+                    : { opacity: 0, y: 4 }
+                }
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.2 }}
+                className="text-sm leading-relaxed text-muted"
+              >
+                {active !== null
+                  ? items[active].description
+                  : 'Hover a technology to see how it fits in.'}
+              </motion.p>
+            </div>
           </div>
         </div>
 
         {/* fallback — mobile */}
-        <div className="mt-8 divide-y divide-border border-t border-border sm:hidden">
+        <div className="mt-4 sm:mt-6 divide-y divide-border border-t border-border sm:hidden">
           {items.map((item) => (
             <div key={item.name} className="py-4">
-              <p className="text-sm font-medium">{item.name}</p>
-              {item.description && <p className="mt-1 text-xs text-muted leading-relaxed">{item.description}</p>}
+              <p className="text-sm font-medium">
+                {item.name}
+              </p>
+
+              {item.description && (
+                <p className="mt-1 text-xs leading-relaxed text-muted">
+                  {item.description}
+                </p>
+              )}
             </div>
           ))}
         </div>
@@ -348,9 +436,9 @@ function CategorySections() {
       {categories.map((cat, ci) => {
         const items = technologies.filter((t) => t.category === cat)
         return (
-          <section key={cat} className={`py-16 ${ci === 0 ? 'border-t border-border' : 'border-t border-border'}`}>
+          <section key={cat} className={`py-12 sm:py-16 ${ci === 0 ? 'border-t border-border' : 'border-t border-border'}`}>
             <Container>
-              <div className="grid gap-8 lg:grid-cols-[220px_1fr] lg:gap-14">
+              <div className="grid gap-7 lg:grid-cols-[220px_1fr] lg:gap-14">
                 <Reveal className="flex items-start gap-4 lg:flex-col lg:items-stretch">
                   <div className="flex-1">
                     <p className="mono-label text-[11px] text-muted">0{ci + 1}</p>
@@ -393,7 +481,7 @@ function LearningRadar() {
   const center = 140
 
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="Growth" title="Learning radar" />
 
@@ -414,9 +502,8 @@ function LearningRadar() {
             >
               <svg viewBox="0 0 280 280" className="absolute inset-0 h-full w-full" aria-hidden>
                 <path
-                  d={`M${center},${center} L${center},${center - radius} A${radius},${radius} 0 0 1 ${
-                    center + radius * Math.sin((Math.PI * 2) / 6)
-                  },${center - radius * Math.cos((Math.PI * 2) / 6)} Z`}
+                  d={`M${center},${center} L${center},${center - radius} A${radius},${radius} 0 0 1 ${center + radius * Math.sin((Math.PI * 2) / 6)
+                    },${center - radius * Math.cos((Math.PI * 2) / 6)} Z`}
                   className="fill-accent/10"
                 />
               </svg>
