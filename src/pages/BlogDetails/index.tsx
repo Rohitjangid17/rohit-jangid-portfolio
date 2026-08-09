@@ -283,7 +283,7 @@ function RelatedArticles({ posts }: { posts: PostDetail[] }) {
           {posts.map((p, i) => (
             <Reveal key={p.slug} delay={i * 0.06}>
               <Link
-                to={`/blog/${p.slug}`}
+                to={`/blog/blog-details/${p.slug}`}
                 className="group block h-full rounded-2xl border border-border bg-card p-5 transition-colors duration-300 hover:border-accent/60"
               >
                 <TopicVisual category={p.category} />
