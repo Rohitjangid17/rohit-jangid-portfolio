@@ -29,7 +29,7 @@ function ExperienceHero() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35] [background-image:linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black_35%,transparent_85%)]"
       />
       <Container className="relative flex min-h-[64vh] flex-col justify-center py-20 sm:min-h-[70vh]">
-        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid items-center gap-7 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 8 }}
@@ -37,14 +37,14 @@ function ExperienceHero() {
               transition={{ duration: 0.5 }}
               className="mono-label text-accent"
             >
-              EXPERIENCE / 03
+              EXPERIENCE
             </motion.p>
 
             <motion.h1
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08 }}
-              className="mt-5 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
+              className="mt-3 sm:mt-6 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
             >
               Where the work happened.
             </motion.h1>
@@ -53,9 +53,9 @@ function ExperienceHero() {
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.16 }}
-              className="mt-6 max-w-lg text-lg leading-relaxed text-muted"
+              className="mt-3 sm:mt-6 max-w-lg text-lg leading-relaxed text-muted"
             >
-              3+ years of building production experiences — across enterprise
+              2.10+ years of building production experiences — across enterprise
               platforms, product teams and real shipping deadlines.
             </motion.p>
           </div>
@@ -146,12 +146,12 @@ function CareerPathGraphic({ reduceMotion, count }: { reduceMotion: boolean; cou
 
 function ExperienceTimeline() {
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="Journey" title="Career timeline" />
-        <div className="relative mt-14">
+        <div className="relative mt-7 sm:mt-14">
           <div aria-hidden className="absolute left-4 top-2 bottom-2 hidden w-px bg-border lg:block" />
-          <div className="space-y-20">
+          <div className="space-y-10 sm:space-y-20">
             {experience.map((e, i) => (
               <Reveal key={e.id} delay={i * 0.06} className="relative lg:pl-16">
                 <TimelineNode index={i} />
@@ -169,7 +169,7 @@ function ExperienceTimeline() {
                   </div>
                 </div>
 
-                <p className="mt-5 max-w-2xl text-sm leading-relaxed text-muted">{e.summary}</p>
+                <p className="mt-4 sm:mt-6 max-w-2xl text-sm leading-relaxed text-muted">{e.summary}</p>
 
                 <RoleTechWork role={e.role} technologies={e.technologies} responsibilities={e.responsibilities} />
 
@@ -336,7 +336,7 @@ function AwardCard() {
   const awardImage = (award as { image?: string }).image
 
   return (
-    <Reveal className="mt-10 border-l-2 border-accent/40 pl-5 sm:pl-6">
+    <Reveal className="mt-4 sm:mt-10 border-l-2 border-accent/40 pl-5 sm:pl-6">
       <p className="mono-label text-accent mb-3">Recognition</p>
       <div className="flex items-start gap-4">
         {awardImage && !imgFailed ? (
@@ -369,10 +369,10 @@ function AwardCard() {
 
 function LessonsLearned() {
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="Field Notes" title="What these years taught me" />
-        <div className="mt-10 max-w-2xl">
+        <div className="mt-5 sm:mt-10 max-w-2xl">
           {lessonsLearned.map((l, i) => (
             <Reveal
               key={l}
