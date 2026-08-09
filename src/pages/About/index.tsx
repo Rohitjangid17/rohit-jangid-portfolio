@@ -77,7 +77,7 @@ function AboutHero() {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35] [background-image:linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black_35%,transparent_85%)]"
       />
       <Container className="relative flex min-h-[64vh] flex-col justify-center py-20 sm:min-h-[70vh]">
-        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid items-center gap-7 sm:gap-14 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 8 }}
@@ -85,14 +85,14 @@ function AboutHero() {
               transition={{ duration: 0.5 }}
               className="mono-label text-accent"
             >
-              ABOUT / 01
+              ABOUT
             </motion.p>
 
             <motion.h1
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08 }}
-              className="mt-5 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
+              className="mt-3 sm:mt-6 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
             >
               The developer behind the interface.
             </motion.h1>
@@ -101,7 +101,7 @@ function AboutHero() {
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.16 }}
-              className="mt-6 max-w-lg text-lg leading-relaxed text-muted"
+              className="mt-3 sm:mt-6 max-w-lg text-lg leading-relaxed text-muted"
             >
               Frontend Engineer focused on turning complex product requirements into
               clean, scalable and intuitive digital experiences.
@@ -111,9 +111,9 @@ function AboutHero() {
               initial={reduceMotion ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.24 }}
-              className="mt-9 flex flex-wrap items-center gap-4"
+              className="mt-4 sm:mt-8 flex flex-wrap items-center gap-4"
             >
-              <Button to="/work" variant="primary">View My Work</Button>
+              <Button to="/work/projects" variant="primary">View My Work</Button>
               <Button to="/contact" variant="secondary">Let&rsquo;s Talk</Button>
             </motion.div>
           </div>
@@ -226,22 +226,13 @@ function Introduction() {
   ]
 
   return (
-    <section className="py-16">
+    <section className="py-12 sm:py-16">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[1fr_260px] lg:gap-16">
-          <Reveal className="max-w-2xl">
-            <p className="mono-label text-accent">02 / Introduction</p>
-            <p className="mt-5 text-2xl font-medium leading-relaxed sm:text-[1.7rem]">
-              I&rsquo;m a Frontend Engineer based in Jaipur with 3+ years of experience
-              building production web applications with Angular, React.js and Next.js.
-            </p>
-            <p className="mt-5 text-lg leading-relaxed text-muted">
-              My work spans enterprise-scale platforms and product-focused builds — from
+        <div className="grid gap-8 lg:grid-cols-[1fr_260px] lg:gap-16">
+          <SectionHeading label="Introduction" title="I&rsquo;m a Frontend Engineer based in Jaipur with 3+ years of experience
+              building production web applications with Angular, React.js and Next.js." subtitle="My work spans enterprise-scale platforms and product-focused builds — from
               reusable component systems to API-integrated dashboards. I care about
-              interfaces that are fast, accessible and genuinely easy to use.
-            </p>
-          </Reveal>
-
+              interfaces that are fast, accessible and genuinely easy to use." />
           <Reveal delay={0.1} className="lg:border-l lg:border-border lg:pl-10">
             <dl className="space-y-5">
               {meta.map(([label, value]) => (
@@ -266,10 +257,10 @@ function CareerJourney() {
   const timeline = [...experience].reverse()
 
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="Journey" title="Career timeline" />
-        <div className="relative mt-12">
+        <div className="relative mt-6 sm:mt-12">
           <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border sm:left-[199px]" />
           <div className="space-y-10">
             {timeline.map((e, i) => (
@@ -328,10 +319,10 @@ function AwardBadge() {
 
 function Philosophy() {
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="Principles" title="Development philosophy" />
-        <div className="relative mt-12">
+        <div className="relative mt-6 sm:mt-12">
           <div className="absolute left-3 top-3 bottom-3 w-px bg-border sm:hidden" />
           <div className="hidden sm:block absolute left-0 right-0 top-3 h-px bg-border" />
           <div className="grid gap-8 sm:grid-cols-5">
@@ -359,10 +350,10 @@ function HowIWork() {
   const reduceMotion = useReducedMotion()
 
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="Process" title="How I work" />
-        <div className="relative mt-12">
+        <div className="relative mt-6 sm:mt-12">
           <div className="absolute left-4 top-0 bottom-0 w-px bg-border lg:hidden" />
           <div className="hidden lg:block absolute left-0 right-0 top-4 h-px bg-border" />
           <motion.div
@@ -401,7 +392,7 @@ function HowIWork() {
 
 function BeyondCoding() {
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <Reveal className="relative overflow-hidden rounded-2xl border border-border bg-card p-8 sm:p-10">
           <svg
@@ -422,7 +413,7 @@ function BeyondCoding() {
             When I&rsquo;m away from the editor, I still create — just with graphite
             instead of TypeScript.
           </p>
-          <div className="mt-6">
+          <div className="mt-4 sm:mt-6">
             <Button to="/sketches" variant="secondary">Explore My Sketches</Button>
           </div>
         </Reveal>
@@ -441,7 +432,7 @@ function CurrentlyExploring() {
   const center = 140
 
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="Growth" title="Currently exploring" />
 
@@ -511,7 +502,7 @@ function Faq() {
   const reduceMotion = useReducedMotion()
 
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="FAQ" title="Common questions" />
         <div className="mt-10 divide-y divide-border border-t border-b border-border">
@@ -571,10 +562,10 @@ function Faq() {
 
 function LessonsLearned() {
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="Reflection" title="What these years taught me" />
-        <div className="mt-10 max-w-2xl divide-y divide-border border-t border-border">
+        <div className="mt-6 sm:mt-12 max-w-2xl divide-y divide-border border-t border-border">
           {lessonsLearned.map((l, i) => (
             <Reveal key={l} delay={i * 0.06} className="grid grid-cols-[3rem_1fr] gap-4 py-5">
               <span className="mono-label text-muted">N&deg;{String(i + 1).padStart(2, '0')}</span>
@@ -593,7 +584,7 @@ function LessonsLearned() {
 
 function FinalCta() {
   return (
-    <section className="relative overflow-hidden border-t border-border py-20">
+    <section className="relative overflow-hidden border-t border-border py-12 sm:py-16">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.3] [background-image:linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] [background-size:40px_40px] [mask-image:radial-gradient(ellipse_60%_100%_at_50%_50%,black_30%,transparent_85%)]"
@@ -601,10 +592,10 @@ function FinalCta() {
       <Container>
         <Reveal className="mx-auto max-w-xl text-center">
           <p className="mono-label text-accent">Let&rsquo;s build</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="mt-2 sm:mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
             Want to build something meaningful?
           </h2>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-4 sm:mt-8 flex flex-wrap items-center justify-center gap-4">
             <Button to="/work" variant="primary">View My Work</Button>
             <Button to="/contact" variant="secondary">Let&rsquo;s Talk</Button>
           </div>
