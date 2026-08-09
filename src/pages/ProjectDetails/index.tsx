@@ -27,10 +27,12 @@ type ProjectDetail = (typeof projects)[number] & {
   links?: { live?: string; repo?: string }
 }
 
-export default function ProjectDetailsPage() {
+export default function ProjectDetails() {
   const params = useParams<{ slug: string }>()
   const project = (projects as ProjectDetail[]).find((p) => p.slug === params?.slug)
-
+  console.log("project: ", project)
+  console.log("params: ", params)
+  
   if (!project) {
     return (
       <section className="py-24">
@@ -39,7 +41,7 @@ export default function ProjectDetailsPage() {
           <h1 className="mt-4 text-2xl font-semibold">This project doesn&rsquo;t exist.</h1>
           <p className="mt-3 text-muted">It may have been renamed or removed.</p>
           <div className="mt-8">
-            <Button to="/work">Back to Work</Button>
+            <Button to="/work/projects">Back to Work</Button>
           </div>
         </Container>
       </section>
@@ -73,7 +75,7 @@ function DetailHero({ project }: { project: ProjectDetail }) {
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.3] [background-image:linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] [background-size:44px_44px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_0%,black_35%,transparent_85%)]"
       />
       <Container className="py-20 sm:py-24">
-        <Link to="/work" className="inline-flex items-center gap-1.5 mono-label text-muted hover:text-accent transition-colors">
+        <Link to="/work/projects" className="inline-flex items-center gap-1.5 mono-label text-muted hover:text-accent transition-colors">
           <ArrowLeftIcon />
           Back to Work
         </Link>
@@ -82,7 +84,7 @@ function DetailHero({ project }: { project: ProjectDetail }) {
           initial={reduceMotion ? false : { opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mono-label text-accent mt-8"
+          className="mono-label text-accent mt-3 sm:mt-6"
         >
           {project.category} · {project.status}
         </motion.p>
@@ -91,7 +93,7 @@ function DetailHero({ project }: { project: ProjectDetail }) {
           initial={reduceMotion ? false : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.08 }}
-          className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl"
+          className="mt-3 sm:mt-6 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]"
         >
           {project.name}
         </motion.h1>
@@ -100,12 +102,12 @@ function DetailHero({ project }: { project: ProjectDetail }) {
           initial={reduceMotion ? false : { opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.16 }}
-          className="mt-5 max-w-2xl text-lg leading-relaxed text-muted"
+          className="mt-3 sm:mt-6 max-w-lg text-lg leading-relaxed text-muted"
         >
           {project.description}
         </motion.p>
 
-        <div className="mt-8 flex flex-wrap gap-1.5">
+        <div className="mt-3 sm:mt-6 flex flex-wrap gap-1.5">
           {project.technologies.map((t) => (
             <span key={t} className="rounded-full border border-border px-2.5 py-1 text-xs text-muted">
               {t}
@@ -125,12 +127,11 @@ function Overview({ project }: { project: ProjectDetail }) {
   const text = project.overview ?? project.description
 
   return (
-    <section className="py-16">
+    <section className="py-12 sm:py-16">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[1fr_260px] lg:gap-16">
+        <div className="grid gap-5 sm:gap-10 lg:grid-cols-[1fr_260px] lg:gap-16">
           <Reveal className="max-w-2xl">
-            <p className="mono-label text-accent">Overview</p>
-            <p className="mt-5 text-xl leading-relaxed text-muted">{text}</p>
+            <SectionHeading label="Overview" subtitle={text} />
           </Reveal>
 
           <Reveal delay={0.1} className="lg:border-l lg:border-border lg:pl-10">
@@ -161,7 +162,7 @@ function Overview({ project }: { project: ProjectDetail }) {
 
 function RoleAndStack({ project }: { project: ProjectDetail }) {
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="My Role" title={project.role} />
         <div className="mt-8 flex flex-wrap gap-2">
@@ -190,9 +191,9 @@ function ChallengeSolution({ project }: { project: ProjectDetail }) {
   const solutions = asList(project.solution)
 
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
-        <div className="grid gap-10 sm:grid-cols-2">
+        <div className="grid gap-5 sm:gap-10 sm:grid-cols-2">
           {challenges.length > 0 && (
             <Reveal>
               <p className="mono-label text-accent">Challenges</p>
@@ -225,10 +226,10 @@ function ChallengeSolution({ project }: { project: ProjectDetail }) {
 
 function KeyFeatures({ features }: { features: string[] }) {
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="Highlights" title="Key features" />
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+        <div className="mt-5 sm:mt-10 grid gap-4 sm:grid-cols-2">
           {features.map((f, i) => (
             <Reveal key={f} delay={i * 0.06} className="rounded-xl border border-border bg-card p-5">
               <p className="mono-label text-accent mb-2">0{i + 1}</p>
@@ -249,10 +250,10 @@ function ResultsImpact({ project }: { project: ProjectDetail }) {
   const results = asList(project.results).concat(asList(project.impact))
 
   return (
-    <section className="py-16 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <SectionHeading label="Impact" title="Results" />
-        <div className="mt-8 max-w-2xl space-y-3">
+        <div className="mt-4 sm:mt-8 max-w-2xl space-y-3">
           {results.map((r, i) => (
             <Reveal key={i} delay={i * 0.06} className="text-sm text-muted leading-relaxed border-l-2 border-accent/40 pl-4">
               {r}
@@ -270,14 +271,14 @@ function ResultsImpact({ project }: { project: ProjectDetail }) {
 
 function DetailCta() {
   return (
-    <section className="py-20 border-t border-border">
+    <section className="py-12 sm:py-16 border-t border-border">
       <Container>
         <Reveal className="mx-auto max-w-xl text-center">
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
             Want to build something meaningful?
           </h2>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Button to="/work" variant="secondary">See More Work</Button>
+          <div className="mt-4 sm:mt-8 flex flex-wrap items-center justify-center gap-4">
+            <Button to="/work/projects" variant="secondary">See More Work</Button>
             <Button to="/contact" variant="primary">Let&rsquo;s Talk</Button>
           </div>
         </Reveal>

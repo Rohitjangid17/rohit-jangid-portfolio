@@ -57,9 +57,9 @@ interface Stat {
 
 const stats: Stat[] = [
   { value: '2.10+', label: 'Years Experience' },
-  { value: `${experience.length}`, label: 'Companies' },
-  { value: `${projects.length}+`, label: 'Projects' },
-  { value: 'Multiple', label: 'Production Modules' },
+  { value: '3', label: 'Companies' },
+  { value: '80+', label: 'Production Modules' },
+  { value: '4', label: 'Frontend Ecosystems' },
 ]
 
 const strengths: string[] = [
@@ -165,7 +165,7 @@ function CtaField() {
 
 export default function Home() {
   const featured: Project[] = (projects as Project[]).filter((p) => p.featured).slice(0, 3)
-  const coreTechNames = ['Angular', 'React.js', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Redux', 'RxJS']
+  const coreTechNames = ['React.js', 'Angular', 'Next.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Redux', 'RxJS']
   const coreTech: Technology[] = (technologies as Technology[]).filter((t) => coreTechNames.includes(t.name))
   const [hoveredTech, setHoveredTech] = useState<number | null>(null)
 
@@ -202,7 +202,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mx-auto mt-6 max-w-xl text-lg text-muted leading-relaxed"
             >
-              Frontend Engineer with 3+ years of experience building scalable, responsive and
+              Frontend Engineer with 2.10+ years of experience building scalable, responsive and
               production-ready web applications using Angular, React.js and Next.js.
             </motion.p>
 
@@ -300,7 +300,7 @@ export default function Home() {
 
             {/* Tech List */}
             <div className="min-w-0">
-              <SectionHeading label="Tech Stack" title="Tools I build with" subtitle="A focused toolkit centered on Angular and React, extended with the ecosystem needed to design, build and ship production interfaces." />
+              <SectionHeading label="Tech Stack" title="Tools I build with" subtitle="A focused toolkit centered on React and Angular, extended with the ecosystem needed to design, build and ship production interfaces." />
               <div className="mt-4 sm:mt-8">
                 {coreTech.map((t, i) => (
                   <Reveal key={t.name} delay={i * 0.04}>

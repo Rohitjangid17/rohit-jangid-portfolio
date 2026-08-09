@@ -221,7 +221,7 @@ function Introduction() {
   const meta = [
     ['Location', 'Jaipur, India'],
     ['Focus', 'Angular / React / Next.js'],
-    ['Experience', '3+ years'],
+    ['Experience', '2.10+ years'],
     ['Status', 'Open to Frontend Engineer roles'],
   ]
 
@@ -229,7 +229,7 @@ function Introduction() {
     <section className="py-12 sm:py-16">
       <Container>
         <div className="grid gap-8 lg:grid-cols-[1fr_260px] lg:gap-16">
-          <SectionHeading label="Introduction" title="I&rsquo;m a Frontend Engineer based in Jaipur with 3+ years of experience
+          <SectionHeading label="Introduction" title="I&rsquo;m a Frontend Engineer based in Jaipur with 2.10+ years of experience
               building production web applications with Angular, React.js and Next.js." subtitle="My work spans enterprise-scale platforms and product-focused builds — from
               reusable component systems to API-integrated dashboards. I care about
               interfaces that are fast, accessible and genuinely easy to use." />
@@ -596,7 +596,7 @@ function FinalCta() {
             Want to build something meaningful?
           </h2>
           <div className="mt-4 sm:mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Button to="/work" variant="primary">View My Work</Button>
+            <Button to="/work/projects" variant="primary">View My Work</Button>
             <Button to="/contact" variant="secondary">Let&rsquo;s Talk</Button>
           </div>
         </Reveal>

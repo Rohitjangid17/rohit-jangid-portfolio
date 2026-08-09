@@ -6,8 +6,8 @@ export const technologies: Technology[] = [
   { name: 'HTML', category: 'Language', description: 'Semantic structure for accessible web pages.' },
   { name: 'CSS', category: 'Language', description: 'Styling, layout and responsive design fundamentals.' },
 
+  { name: 'React.js', category: 'Library', description: 'Component-driven UI development for modern web apps.' },
   { name: 'Angular', category: 'Framework', description: 'Primary framework for enterprise-scale production applications.' },
-  { name: 'React.js', category: 'Framework', description: 'Component-driven UI development for modern web apps.' },
   { name: 'Next.js', category: 'Framework', description: 'React framework for production-grade, SEO-friendly applications.' },
 
   { name: 'Tailwind CSS', category: 'Styling', description: 'Utility-first styling for fast, consistent UI development.' },
@@ -40,7 +40,8 @@ export const technologies: Technology[] = [
 ]
 
 export const currentlyExploring = [
-  // TODO: replace with what you're actually exploring right now
-  'Advanced Next.js App Router patterns',
-  'Web performance & Core Web Vitals',
+  'Advanced Next.js & React Architecture',
+  'Modern State Management Patterns',
+  'Frontend Testing with Jest & React Testing Library',
+  'AI-Assisted Frontend Development',
 ]

@@ -30,7 +30,6 @@ export default function ResumeModal({ open, onClose }: { open: boolean; onClose:
               <button onClick={() => window.print()} aria-label="Print resume" className="grid h-9 w-9 place-items-center rounded-full border border-border hover:text-accent hover:border-accent">
                 <Printer size={16} />
               </button>
-              {/* TODO: point this at a real generated/downloadable PDF, e.g. /resume.pdf */}
               <a href="/resume.pdf" download aria-label="Download resume PDF" className="grid h-9 w-9 place-items-center rounded-full border border-border hover:text-accent hover:border-accent">
                 <Download size={16} />
               </a>

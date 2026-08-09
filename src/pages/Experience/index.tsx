@@ -37,7 +37,7 @@ function ExperienceHero() {
               transition={{ duration: 0.5 }}
               className="mono-label text-accent"
             >
-              EXPERIENCE
+              WORK / EXPERIENCE
             </motion.p>
 
             <motion.h1
@@ -102,7 +102,7 @@ function CareerPathGraphic({ reduceMotion, count }: { reduceMotion: boolean; cou
               aria-hidden
               className="ml-0.5 inline-block h-3 w-[1.5px] translate-y-[2px] bg-muted align-middle"
               animate={reduceMotion ? { opacity: 1 } : { opacity: [1, 0, 1] }}
-              transition={reduceMotion ? {} : { duration: 1, repeat: Infinity, ease: 'steps(1)' }}
+              transition={reduceMotion ? {} : { duration: 1, repeat: Infinity, ease: [1, 0, 1, 0] }}
             />
           </div>
         </div>

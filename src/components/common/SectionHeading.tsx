@@ -6,7 +6,7 @@ export default function SectionHeading({
   subtitle,
 }: {
   label?: string
-  title: string
+  title?: string
   subtitle?: string
 }) {
   return (
@@ -18,7 +18,7 @@ export default function SectionHeading({
       className="max-w-2xl"
     >
       {label && <p className="mono-label text-accent mb-3">{label}</p>}
-      <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">{title}</h2>
+      {title && <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight">{title}</h2>}
       {subtitle && <p className="mt-3 text-muted leading-relaxed">{subtitle}</p>}
     </motion.div>
   )

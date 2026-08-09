@@ -19,7 +19,7 @@ function ArrowRightIcon() {
 
 export default function Projects() {
   const [filter, setFilter] = useState<(typeof projectFilters)[number]>('All')
-  const filtered = filter === 'All' ? projects : projects.filter((p) => p.category === filter)
+  const filtered = filter === 'All' ? projects : filter === 'React.js' ? projects.filter((p) => p.category === 'React.js' || p.category === 'Next.js') : projects.filter((p) => p.category === filter)
 
   return (
     <>
@@ -178,6 +178,7 @@ function FilterBar({
   filter: (typeof projectFilters)[number]
   setFilter: (f: (typeof projectFilters)[number]) => void
 }) {
+  console.log("filter: ", filter)
   return (
     <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
       {projectFilters.map((f) => {
@@ -186,11 +187,10 @@ function FilterBar({
           <button
             key={f}
             onClick={() => setFilter(f)}
-            className={`relative rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
-              isActive
-                ? 'border-accent/40 text-accent'
-                : 'border-border text-muted hover:text-foreground hover:border-foreground/30'
-            }`}
+            className={`relative rounded-full border px-4 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${isActive
+              ? 'border-accent/40 text-accent'
+              : 'border-border text-muted hover:text-foreground hover:border-foreground/30'
+              }`}
           >
             {isActive && (
               <motion.span

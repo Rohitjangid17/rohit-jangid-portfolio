@@ -6,7 +6,7 @@ export interface NavItem {
 
 export interface Technology {
   name: string
-  category: 'Language' | 'Framework' | 'Styling' | 'State & Data' | 'Testing' | 'Tools' | 'AI Toolkit'
+  category: 'Language' | 'Framework' | 'Library' |  'Styling' | 'State & Data' | 'Testing' | 'Tools' | 'AI Toolkit'
   description: string
 }
 
@@ -31,13 +31,18 @@ export interface ExperienceEntry {
 export interface Project {
   slug: string
   name: string
-  category: 'Enterprise' | 'Frontend' | 'Angular' | 'React' | 'Next.js' | 'Personal'
+  category:   | 'Enterprise' | 'Angular' | 'React.js' | 'Next.js' | 'React Native'
   description: string
   role: string
   technologies: string[]
   status: 'Production' | 'Completed' | 'In Progress'
   featured?: boolean
+  overview?: string
   links?: { label: string; url: string }[]
+  challenges: string[]
+  solution: string[]
+  keyFeatures: string[]
+  results: string[]
 }
 
 export interface BlogPost {
@@ -46,5 +51,6 @@ export interface BlogPost {
   category: string
   date: string
   readingTime: string
-  summary: string
+  summary: string,
+  content: string
 }

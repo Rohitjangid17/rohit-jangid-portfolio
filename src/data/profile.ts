@@ -1,7 +1,7 @@
 export const profile = {
   name: 'Rohit Jangid',
   title: 'Frontend Engineer',
-  experience: '3+ Years',
+  experience: '2.10+ Years',
   location: 'Jaipur, Rajasthan, India',
   availability: 'Open to Frontend Engineer opportunities',
   joining: 'Immediately available',
@@ -9,6 +9,6 @@ export const profile = {
   email: 'jangidrohit817@gmail.com',
   linkedin: 'https://www.linkedin.com/in/frontend-rohit-jangid/',
   github: 'https://github.com/Rohitjangid17',
-  coreStack: ['Angular', 'React.js', 'Next.js', "React Native"],
+  coreStack: ['React.js', 'Angular', 'Next.js', "React Native"],
   quote: 'Building thoughtful, production-ready interfaces.'
 }
