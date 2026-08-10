@@ -4,7 +4,10 @@ import Container from '@/components/common/Container'
 import Reveal from '@/components/common/Reveal'
 
 // TODO: replace with real sketch filenames placed in src/assets/sketches/
-const sketches: string[] = []
+const sketches = Array.from(
+  { length: 8 },
+  (_, i) => `/sketch_${i + 1}.jpeg`
+)
 
 function CloseIcon() {
   return (
