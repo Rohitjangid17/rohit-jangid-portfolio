@@ -1,4 +1,4 @@
-import { useState, type MouseEvent } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Container from '@/components/common/Container'
 import Button from '@/components/common/Button'
@@ -129,36 +129,6 @@ function ProjectPreview({ project, large = false }: ProjectPreviewProps) {
           ))}
         </div>
       </div>
-    </div>
-  )
-}
-
-interface GlowPosition {
-  x: number
-  y: number
-}
-
-/* Mouse-reactive glow + dot grid for the final CTA */
-function CtaField() {
-  const [pos, setPos] = useState<GlowPosition>({ x: 50, y: 50 })
-
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    setPos({
-      x: ((e.clientX - rect.left) / rect.width) * 100,
-      y: ((e.clientY - rect.top) / rect.height) * 100,
-    })
-  }
-
-  return (
-    <div aria-hidden className="absolute inset-0" onMouseMove={handleMouseMove}>
-      <div className="absolute inset-0 opacity-[0.3] [background-image:radial-gradient(rgb(var(--border))_1px,transparent_1px)] [background-size:20px_20px]" />
-      <div
-        className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          background: `radial-gradient(380px circle at ${pos.x}% ${pos.y}%, rgb(var(--accent)/0.18), transparent 70%)`,
-        }}
-      />
     </div>
   )
 }
@@ -571,39 +541,37 @@ export default function Home() {
       </section>
 
       {/* Final CTA — minimal, mouse-reactive graphic */}
-      <section className="py-12 sm:py-16 border-t border-border">
+      <section className="relative overflow-hidden border-t border-border py-12 sm:py-16">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.3] [background-image:linear-gradient(to_right,theme(colors.border)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.border)_1px,transparent_1px)] [background-size:40px_40px] [mask-image:radial-gradient(ellipse_60%_100%_at_50%_50%,black_30%,transparent_85%)]"
+        />
         <Container>
-          <Reveal className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 text-center">
-            <CtaField />
-            <div className="relative">
-              <p className="mono-label text-accent">Contact</p>
-              <h2 className="mt-2 sm:mt-4 text-3xl sm:text-4xl font-semibold tracking-tight max-w-2xl mx-auto">
-                Have a product that deserves a great frontend?
-              </h2>
-              <p className="mt-2 sm:mt-4 text-muted max-w-md mx-auto">
-                Let's build something fast, useful and memorable.
-              </p>
-              <div className="mt-4 sm:mt-8 flex flex-wrap justify-center gap-3">
-                <Button to="/contact">Start a Conversation</Button>
-                <a
-                  href="/Rohit_Jangid_SDE_Resume.pdf"
-                  download="Rohit_Jangid_SDE_Resume.pdf"
-                  className="hidden md:inline-flex"
-                  aria-label="Download Resume"
+          <Reveal className="mx-auto max-w-xl text-center">
+            <p className="mono-label text-accent">Contact</p>
+            <h2 className="mt-2 sm:mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Have a product that deserves a great frontend?
+            </h2>
+            <div className="mt-4 sm:mt-8 flex flex-wrap items-center justify-center gap-4">
+              <Button to="/contact" variant="primary">Start a Conversation</Button>
+              <a
+                href="/Rohit_Jangid_SDE_Resume.pdf"
+                download="Rohit_Jangid_SDE_Resume.pdf"
+                className="hidden md:inline-flex"
+                aria-label="Download Resume"
+              >
+                <Button
+                  variant="secondary"
+                  className="group inline-flex items-center gap-2"
                 >
-                  <Button
-                    variant="secondary"
-                    className="group inline-flex items-center gap-2"
-                  >
-                    Resume
-                    <Download
-                      size={15}
-                      strokeWidth={1.8}
-                      className="transition-transform duration-200 group-hover:translate-y-0.5"
-                    />
-                  </Button>
-                </a>
-              </div>
+                  Resume
+                  <Download
+                    size={15}
+                    strokeWidth={1.8}
+                    className="transition-transform duration-200 group-hover:translate-y-0.5"
+                  />
+                </Button>
+              </a>
             </div>
           </Reveal>
         </Container>

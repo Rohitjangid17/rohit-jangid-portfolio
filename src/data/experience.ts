@@ -7,7 +7,7 @@ export const experience: ExperienceEntry[] = [
     role: 'Software Developer',
     period: 'November 2025 – Present',
     location: 'Jaipur, Rajasthan, India',
-    employmentType: 'Contract · On-site',
+    employmentType: 'Full-time · On-site',
     summary:
       'Working on XSwift, an enterprise logistics, shipment, and fleet management platform using Angular, TypeScript, Bootstrap, and SCSS.',
     responsibilities: [
