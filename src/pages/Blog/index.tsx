@@ -176,16 +176,16 @@ function EditorialGraphic({ reduceMotion }: { reduceMotion: boolean }) {
           [210, 200],
           [300, 90],
         ].map(([x, y], i) => (
-          <motion.circle
+          <circle
             key={i}
             cx={x}
             cy={y}
             r={4}
             className="fill-card stroke-accent"
-            strokeWidth="1.5"
-            initial={reduceMotion ? false : { opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.7 + i * 0.08 }}
+            strokeWidth={1.5}
+            style={{
+              opacity: reduceMotion ? 1 : undefined,
+            }}
           />
         ))}
       </svg>
@@ -251,9 +251,8 @@ function CategoryFilter({ category, setCategory }: { category: string; setCatego
           <button
             key={c}
             onClick={() => setCategory(c)}
-            className={`relative rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
-              isActive ? 'text-accent' : 'text-muted hover:text-foreground'
-            }`}
+            className={`relative rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${isActive ? 'text-accent' : 'text-muted hover:text-foreground'
+              }`}
           >
             {isActive && (
               <motion.span
@@ -342,7 +341,7 @@ function FeaturedPost({ post }: { post: Post }) {
   return (
     <Reveal className="mt-6 sm:mt-12">
       <Link
-        to={`/blog/${post.slug}`}
+        to={`/blog/blog-details/${post.slug}`}
         className="group grid gap-0 overflow-hidden rounded-2xl border border-border bg-card transition-colors duration-300 hover:border-accent/60 lg:grid-cols-[1.1fr_1fr]"
       >
         <div className="border-b border-border p-6 sm:p-8 lg:border-b-0 lg:border-r lg:p-10">

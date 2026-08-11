@@ -14,6 +14,7 @@ import Contact from '@/pages/Contact'
 import NotFound from '@/pages/NotFound'
 import ProjectDetails from './pages/ProjectDetails'
 import BlogDetails from './pages/BlogDetails'
+import RouteChangeLoader from './components/common/RouteChangeLoader'
 
 function PageTransition({ children }: { children: ReactNode }) {
   return (
@@ -34,6 +35,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <RouteChangeLoader />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageTransition><Home /></PageTransition>} />
