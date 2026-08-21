@@ -6,6 +6,7 @@ import Container from '@/components/common/Container'
 import Reveal from '@/components/common/Reveal'
 import { projects, projectFilters } from '@/data/projects'
 import { Link } from 'react-router-dom'
+import Seo from '@/components/common/Seo'
 
 type Project = (typeof projects)[number]
 
@@ -23,6 +24,11 @@ export default function Projects() {
 
   return (
     <>
+      <Seo
+        title="Projects | Rohit Jangid"
+        description="Explore frontend projects built by Rohit Jangid using React, Angular, Next.js, TypeScript, Tailwind CSS, and modern web technologies."
+        canonical="/work/projects"
+      />
       <ProjectsHero />
 
       <section className="py-12 sm:py-16 border-t border-border">

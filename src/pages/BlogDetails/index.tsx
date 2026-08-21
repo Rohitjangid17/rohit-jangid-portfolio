@@ -4,6 +4,7 @@ import Reveal from '@/components/common/Reveal'
 import { blogPosts } from '@/data/blog'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Link, useParams } from 'react-router-dom'
+import Seo from '@/components/common/Seo'
 
 // Extends the inferred post shape with an optional `content` field. If your
 // data doesn't have one yet, the article body falls back to the summary —
@@ -42,6 +43,11 @@ export default function BlogDetails() {
 
   return (
     <>
+      <Seo
+        title={`${post.title} | Rohit Jangid`}
+        description={post.summary}
+        canonical={`/blog/${post.slug}`}
+      />
       <DetailHero post={post} />
       <ArticleBody post={post} />
       {related.length > 0 && <RelatedArticles posts={related} />}

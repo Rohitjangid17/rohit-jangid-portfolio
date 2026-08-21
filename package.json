@@ -1,5 +1,5 @@
 {
-  "name": "rohit-jangid-portfolio",
+  "name": "rohit-portfolio",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -15,6 +15,7 @@
     "lucide-react": "^0.400.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-helmet-async": "^3.0.0",
     "react-router-dom": "^6.26.0"
   },
   "devDependencies": {

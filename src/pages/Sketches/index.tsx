@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Container from '@/components/common/Container'
 import Reveal from '@/components/common/Reveal'
+import Seo from '@/components/common/Seo'
 
 // TODO: replace with real sketch filenames placed in src/assets/sketches/
 const sketches = Array.from(
@@ -50,6 +51,11 @@ export default function Sketches() {
 
   return (
     <>
+      <Seo
+        title="Pencil Sketches | Rohit Jangid"
+        description="Explore pencil sketches and artwork by Rohit Jangid, featuring a collection of creative hand-drawn artwork and personal sketches."
+        canonical="/sketches"
+      />
       <SketchesHero />
 
       <section className="py-12 sm:py-16 border-t border-border">
@@ -206,13 +212,12 @@ function SketchTile({
     <button
       type="button"
       onClick={onOpen}
-      className={`group relative block w-full overflow-hidden rounded-xl border border-border bg-card text-left transition-colors duration-300 hover:border-accent/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
-        large ? 'aspect-[16/9]' : ''
-      }`}
+      className={`group relative block w-full overflow-hidden rounded-xl border border-border bg-card text-left transition-colors duration-300 hover:border-accent/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${large ? 'aspect-[16/9]' : ''
+        }`}
     >
       <img
         src={item.src}
-        alt={item.title}
+        alt={`Pencil sketch by Rohit Jangid - ${item.title}`}
         loading="lazy"
         className="w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
       />

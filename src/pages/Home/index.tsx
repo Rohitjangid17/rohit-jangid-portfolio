@@ -11,6 +11,7 @@ import { technologies } from '@/data/technologies'
 import { blogPosts } from '@/data/blog'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Download } from 'lucide-react'
+import Seo from '@/components/common/Seo'
 
 interface Profile {
   title: string
@@ -145,6 +146,12 @@ export default function Home() {
 
   return (
     <>
+      <Seo
+        title="Rohit Jangid | Frontend Developer | Angular & React"
+        description="Rohit Jangid is a Frontend Developer specializing in Angular, React.js, Next.js, TypeScript, and JavaScript."
+        canonical="/"
+      />
+      
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 [background:radial-gradient(900px_circle_at_top,_rgb(var(--accent)/0.14),transparent_60%)]" />

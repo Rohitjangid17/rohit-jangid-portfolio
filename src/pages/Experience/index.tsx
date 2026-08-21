@@ -4,10 +4,16 @@ import Container from '@/components/common/Container'
 import SectionHeading from '@/components/common/SectionHeading'
 import Reveal from '@/components/common/Reveal'
 import { experience, award, lessonsLearned } from '@/data/experience'
+import Seo from '@/components/common/Seo'
 
 export default function Experience() {
   return (
     <>
+      <Seo
+        title="Work Experience | Rohit Jangid"
+        description="Explore Rohit Jangid's professional experience as a Frontend Developer, working with Angular, React.js, Next.js, TypeScript, and production-ready web applications."
+        canonical="/work/experience"
+      />
       <ExperienceHero />
       <ExperienceTimeline />
       <LessonsLearned />

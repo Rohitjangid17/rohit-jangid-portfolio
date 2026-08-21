@@ -6,6 +6,7 @@ import Reveal from '@/components/common/Reveal'
 import Button from '@/components/common/Button'
 import { profile } from '@/data/profile'
 import { Copy, Check, Linkedin, Github, ArrowUpRight, Loader2, CheckCircle2, AlertCircle, } from 'lucide-react'
+import Seo from '@/components/common/Seo'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -93,6 +94,11 @@ export default function Contact() {
 
   return (
     <>
+      <Seo
+        title="Contact Rohit Jangid | Frontend Developer"
+        description="Get in touch with Rohit Jangid for frontend development opportunities, React and Angular projects, collaborations, and professional inquiries."
+        canonical="/contact"
+      />
       <ContactHero onStart={scrollToForm} />
 
       <section
@@ -277,6 +283,7 @@ function SignalGraphic({
                 y1={n.y}
                 x2={next.x}
                 y2={next.y}
+                viewport={{ once: true }}
                 strokeDasharray="4 5"
                 initial={
                   reduceMotion

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://rohitjangid.vercel.app/</loc>
+  </url>
+
+  <url>
+    <loc>https://rohitjangid.vercel.app/about</loc>
+  </url>
+
+  <url>
+    <loc>https://rohitjangid.vercel.app/tech-stack</loc>
+  </url>
+
+  <url>
+    <loc>https://rohitjangid.vercel.app/work/experience</loc>
+  </url>
+
+  <url>
+    <loc>https://rohitjangid.vercel.app/work/projects</loc>
+  </url>
+
+  <url>
+    <loc>https://rohitjangid.vercel.app/sketches</loc>
+  </url>
+
+  <url>
+    <loc>https://rohitjangid.vercel.app/blog</loc>
+  </url>
+
+  <url>
+    <loc>https://rohitjangid.vercel.app/contact</loc>
+  </url>
+
+</urlset>

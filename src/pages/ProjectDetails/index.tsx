@@ -5,6 +5,7 @@ import Reveal from '@/components/common/Reveal'
 import Button from '@/components/common/Button'
 import { projects } from '@/data/projects'
 import { Link, useParams } from 'react-router-dom'
+import Seo from '@/components/common/Seo'
 
 // Extends the inferred project shape with optional fields a case study may
 // eventually carry. All are optional — sections only render when the data
@@ -32,7 +33,7 @@ export default function ProjectDetails() {
   const project = (projects as ProjectDetail[]).find((p) => p.slug === params?.slug)
   console.log("project: ", project)
   console.log("params: ", params)
-  
+
   if (!project) {
     return (
       <section className="py-24">
@@ -50,6 +51,11 @@ export default function ProjectDetails() {
 
   return (
     <>
+      <Seo
+        title={`${project.name} | Rohit Jangid`}
+        description={project.description}
+        canonical={`/work/projects/${project.slug}`}
+      />
       <DetailHero project={project} />
       <Overview project={project} />
       <RoleAndStack project={project} />

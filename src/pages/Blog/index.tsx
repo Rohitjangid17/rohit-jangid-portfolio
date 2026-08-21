@@ -5,6 +5,7 @@ import Reveal from '@/components/common/Reveal'
 import { blogPosts } from '@/data/blog'
 import { Search, ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import Seo from '@/components/common/Seo'
 
 type Post = (typeof blogPosts)[number]
 
@@ -26,6 +27,11 @@ export default function Blog() {
 
   return (
     <>
+      <Seo
+        title="Blog | Rohit Jangid"
+        description="Read frontend development articles and insights from Rohit Jangid covering React, Angular, TypeScript, JavaScript, performance, and modern web development."
+        canonical="/blog"
+      />
       <BlogHero />
 
       <section className="py-12 sm:py-16 border-t border-border">

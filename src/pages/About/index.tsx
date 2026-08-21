@@ -6,6 +6,7 @@ import Reveal from '@/components/common/Reveal'
 import Button from '@/components/common/Button'
 import { experience, lessonsLearned } from '@/data/experience'
 import { currentlyExploring } from '@/data/technologies'
+import Seo from '@/components/common/Seo'
 
 const philosophy = [
   'Build for people, not screenshots.',
@@ -49,6 +50,12 @@ const AWARD_IMAGE_SRC = '/images/awards/emerging-talent.png'
 export default function About() {
   return (
     <>
+      <Seo
+        title="About Rohit Jangid | Frontend Developer"
+        description="Learn about Rohit Jangid, a Frontend Developer with experience in Angular, React.js, Next.js, TypeScript, and modern frontend development."
+        canonical="/about"
+      />
+
       <AboutHero />
       <Introduction />
       <CareerJourney />

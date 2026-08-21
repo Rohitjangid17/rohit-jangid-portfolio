@@ -5,6 +5,7 @@ import SectionHeading from '@/components/common/SectionHeading'
 import Reveal from '@/components/common/Reveal'
 import { technologies, currentlyExploring } from '@/data/technologies'
 import { Technology } from '@/types'
+import Seo from '@/components/common/Seo'
 
 const categories: Technology['category'][] = ['Language', 'Framework', 'Styling', 'State & Data', 'Testing', 'Tools', 'AI Toolkit']
 
@@ -25,6 +26,11 @@ const CORE_STACK = ['Angular', 'React.js', 'Next.js', 'TypeScript', 'JavaScript'
 export default function TechStack() {
   return (
     <>
+      <Seo
+        title="Tech Stack | Rohit Jangid"
+        description="Explore the frontend technologies and tools Rohit Jangid uses, including Angular, React.js, Next.js, TypeScript, JavaScript, Tailwind CSS, Redux, and RxJS."
+        canonical="/tech-stack"
+      />
       <TechStackHero />
       <EcosystemDiagram />
       <CategorySections />
@@ -128,6 +134,7 @@ function StackGraphic({ reduceMotion }: { reduceMotion: boolean }) {
               y1={nodes[a].y}
               x2={nodes[b].x}
               y2={nodes[b].y}
+              viewport={{ once: true }}
               strokeDasharray="4 5"
               initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}
               animate={{ pathLength: 1, opacity: 1 }}
