@@ -113,8 +113,8 @@ function StackGraphic({ reduceMotion }: { reduceMotion: boolean }) {
         </div>
         <div className="space-y-2 px-4 pt-4 font-mono text-[11px] leading-relaxed text-muted">
           <p><span className="text-accent">export const</span> stack = {'{'}</p>
-          <p className="pl-4">ui: <span className="text-accent">[&apos;React&apos;, &apos;Angular&apos;]</span>,</p>
-          <p className="pl-4">lang: <span className="text-accent">&apos;TypeScript&apos;</span>,</p>
+          <p className="pl-4">ui: <span className="text-accent">[&apos;React&apos;, &apos;Angular&apos;, &apos;Next.js&apos;, &apos;React Native&apos;]</span>,</p>
+          <p className="pl-4">lang: <span className="text-accent">[&apos;JavaScript&apos;, &apos;TypeScript&apos;]&apos;</span></p>
           <p>{'}'}</p>
         </div>
       </div>
