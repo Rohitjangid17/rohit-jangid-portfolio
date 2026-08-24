@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async'
-
 interface SeoProps {
     title: string
     description: string
@@ -7,16 +6,14 @@ interface SeoProps {
     image?: string
 }
 
-const Seo = ({
+export default function Seo ({
     title,
     description,
     canonical = '/',
     image = 'https://rohitjangid.vercel.app/og-image.png',
-}: SeoProps) => {
+}: SeoProps) {
     const siteUrl = 'https://rohitjangid.vercel.app'
-
     const canonicalUrl = `${siteUrl}${canonical}`
-
     const personSchema = {
         '@context': 'https://schema.org',
         '@type': 'Person',
@@ -45,15 +42,13 @@ const Seo = ({
             <meta property="og:url" content={canonicalUrl} />
             <meta property="og:site_name" content="Rohit Jangid Portfolio" />
             <meta property="og:image" content={image} />
-            <meta name="twitter:card" content="summary_large_image" />
+            {/* <meta name="twitter:card" content="summary_large_image" />
             <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={description} />
-            <meta name="twitter:image" content={image} />
+            <meta name="twitter:image" content={image} /> */}
             <script type="application/ld+json">
                 {JSON.stringify(personSchema)}
             </script>
         </Helmet>
     )
 }
-
-export default Seo
